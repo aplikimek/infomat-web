@@ -1,14 +1,35 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
 import { Mail, Send, CheckCircle } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/SocialIcons";
+import { client } from "@/sanity/lib/client";
+import { siteSettingsQuery } from "@/sanity/lib/queries";
+
+type SiteSettings = {
+  email?: string;
+  github?: string;
+  linkedin?: string;
+};
+
+const staticSettings: SiteSettings = {
+  email: "info@infomat.app",
+  github: "https://github.com/infomat",
+  linkedin: "https://linkedin.com/in/infomat",
+};
 
 export default function ContactPage() {
   const t = useTranslations("contact");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [settings, setSettings] = useState<SiteSettings>(staticSettings);
+
+  useEffect(() => {
+    client.fetch<SiteSettings>(siteSettingsQuery)
+      .then((d) => { if (d?.email || d?.github || d?.linkedin) setSettings(d); })
+      .catch(() => {});
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -100,41 +121,47 @@ export default function ContactPage() {
             <div className="rounded-2xl bg-slate-900 border border-slate-800 p-7 h-fit sticky top-24">
               <h3 className="text-white font-semibold text-lg mb-6">{t("info_title")}</h3>
               <ul className="space-y-5">
-                <li className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400">
-                    <Mail size={18} />
-                  </div>
-                  <div>
-                    <p className="text-xs text-slate-500 mb-0.5">Email</p>
-                    <a href="mailto:info@infomat.app" className="text-slate-300 hover:text-blue-400 transition-colors text-sm">
-                      info@infomat.app
-                    </a>
-                  </div>
-                </li>
-                <li className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-slate-700/50 flex items-center justify-center text-slate-400">
-                    <GithubIcon size={18} />
-                  </div>
-                  <div>
-                    <p className="text-xs text-slate-500 mb-0.5">GitHub</p>
-                    <a href="https://github.com/infomat" target="_blank" rel="noopener noreferrer"
-                      className="text-slate-300 hover:text-blue-400 transition-colors text-sm">
-                      github.com/infomat
-                    </a>
-                  </div>
-                </li>
-                <li className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-700/20 flex items-center justify-center text-blue-400">
-                    <LinkedinIcon size={18} />
-                  </div>
-                  <div>
-                    <p className="text-xs text-slate-500 mb-0.5">LinkedIn</p>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-                      className="text-slate-300 hover:text-blue-400 transition-colors text-sm">
-                      linkedin.com/in/infomat
-                    </a>
-                  </div>
-                </li>
+                {settings.email && (
+                  <li className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400">
+                      <Mail size={18} />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500 mb-0.5">Email</p>
+                      <a href={`mailto:${settings.email}`} className="text-slate-300 hover:text-blue-400 transition-colors text-sm">
+                        {settings.email}
+                      </a>
+                    </div>
+                  </li>
+                )}
+                {settings.github && (
+                  <li className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-slate-700/50 flex items-center justify-center text-slate-400">
+                      <GithubIcon size={18} />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500 mb-0.5">GitHub</p>
+                      <a href={settings.github} target="_blank" rel="noopener noreferrer"
+                        className="text-slate-300 hover:text-blue-400 transition-colors text-sm">
+                        {settings.github.replace("https://", "")}
+                      </a>
+                    </div>
+                  </li>
+                )}
+                {settings.linkedin && (
+                  <li className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-blue-700/20 flex items-center justify-center text-blue-400">
+                      <LinkedinIcon size={18} />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500 mb-0.5">LinkedIn</p>
+                      <a href={settings.linkedin} target="_blank" rel="noopener noreferrer"
+                        className="text-slate-300 hover:text-blue-400 transition-colors text-sm">
+                        {settings.linkedin.replace("https://", "")}
+                      </a>
+                    </div>
+                  </li>
+                )}
               </ul>
             </div>
           </div>

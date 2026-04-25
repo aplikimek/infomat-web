@@ -10,6 +10,7 @@ export default defineConfig({
   title: "InfoMat CMS",
   projectId,
   dataset,
+  basePath: "/studio",
   plugins: [
     structureTool({ structure }),
     visionTool({ defaultApiVersion: apiVersion }),

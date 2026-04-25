@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import {
@@ -12,6 +15,8 @@ import {
   BookOpen,
   ChevronRight,
 } from "lucide-react";
+import { client } from "@/sanity/lib/client";
+import { featuresSectionQuery } from "@/sanity/lib/queries";
 
 function HeroSection() {
   const t = useTranslations("home.hero");
@@ -79,63 +84,91 @@ function HeroSection() {
   );
 }
 
-function FeaturesSection() {
-  const t = useTranslations("home.features");
+type FeatureItem = {
+  titleSq?: string;
+  titleEn?: string;
+  descSq?: string;
+  descEn?: string;
+  icon?: string;
+};
 
-  const features = [
-    {
-      key: "courses",
-      icon: <GraduationCap size={28} className="text-blue-400" />,
-      bg: "bg-blue-500/10",
-    },
-    {
-      key: "datatools",
-      icon: <BarChart3 size={28} className="text-indigo-400" />,
-      bg: "bg-indigo-500/10",
-    },
-    {
-      key: "algorithms",
-      icon: <GitBranch size={28} className="text-violet-400" />,
-      bg: "bg-violet-500/10",
-    },
-    {
-      key: "casestudies",
-      icon: <BookOpen size={28} className="text-cyan-400" />,
-      bg: "bg-cyan-500/10",
-    },
-  ] as const;
+type FeaturesData = {
+  title?: string;
+  titleEn?: string;
+  items?: FeatureItem[];
+};
+
+const staticFeatures: FeaturesData = {
+  title: "Veçori të Fuqishme për Zgjidhje më të Zgjuara",
+  titleEn: "Powerful Features for Smarter Solutions",
+  items: [
+    { icon: "courses",    titleSq: "Kurse Matematike të Aplikuara",       titleEn: "Applied Math Courses",   descSq: "Mëso matematikën me shembuj praktikë dhe aplikime në botën reale.",              descEn: "Learn mathematics with hands-on examples and real-world applications." },
+    { icon: "datatools",  titleSq: "Mjete Analize të Të Dhënave",          titleEn: "Data Analysis Tools",    descSq: "Mjete të fuqishme për të analizuar, vizualizuar dhe interpretuar të dhënat tuaja.", descEn: "Powerful tools to analyze, visualize and interpret your data." },
+    { icon: "algorithms", titleSq: "Dizajn Algoritmesh",                   titleEn: "Algorithm Design",       descSq: "Dizajnoni dhe implementoni algoritme efikase për probleme komplekse.",             descEn: "Design and implement efficient algorithms for complex problems." },
+    { icon: "casestudies",titleSq: "Raste Studimi",                        titleEn: "Case Studies",           descSq: "Eksploroni raste studimi reale nga teknologjia, financa dhe më shumë.",          descEn: "Explore real-world case studies from tech, finance, and more." },
+  ],
+};
+
+const iconMap: Record<string, React.ReactNode> = {
+  courses:    <GraduationCap size={28} className="text-blue-400" />,
+  datatools:  <BarChart3     size={28} className="text-indigo-400" />,
+  algorithms: <GitBranch     size={28} className="text-violet-400" />,
+  casestudies:<BookOpen      size={28} className="text-cyan-400" />,
+};
+
+const bgMap: Record<string, string> = {
+  courses:    "bg-blue-500/10",
+  datatools:  "bg-indigo-500/10",
+  algorithms: "bg-violet-500/10",
+  casestudies:"bg-cyan-500/10",
+};
+
+function FeaturesSection() {
+  const locale = useLocale();
+  const [data, setData] = useState<FeaturesData>(staticFeatures);
+
+  useEffect(() => {
+    client.fetch<FeaturesData>(featuresSectionQuery)
+      .then((d) => { if (d?.items?.length) setData(d); })
+      .catch(() => {});
+  }, []);
+
+  const sectionTitle = locale === "sq" ? data.title : data.titleEn;
 
   return (
     <section className="py-24 bg-slate-50 dark:bg-slate-900/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">
-            {t("title")}
+            {sectionTitle}
           </h2>
           <div className="w-16 h-1 bg-blue-500 rounded-full mx-auto mt-4" />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map(({ key, icon, bg }) => (
-            <div
-              key={key}
-              className="group p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500/40 hover:shadow-lg hover:shadow-blue-500/5 transition-all"
-            >
-              <div className={`w-12 h-12 rounded-xl ${bg} flex items-center justify-center mb-5`}>
-                {icon}
+          {data.items?.map((item, i) => {
+            const iconKey = item.icon ?? "courses";
+            return (
+              <div
+                key={i}
+                className="group p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500/40 hover:shadow-lg hover:shadow-blue-500/5 transition-all"
+              >
+                <div className={`w-12 h-12 rounded-xl ${bgMap[iconKey] ?? "bg-slate-700"} flex items-center justify-center mb-5`}>
+                  {iconMap[iconKey]}
+                </div>
+                <h3 className="text-white font-semibold text-lg mb-2">
+                  {locale === "sq" ? item.titleSq : item.titleEn}
+                </h3>
+                <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                  {locale === "sq" ? item.descSq : item.descEn}
+                </p>
+                <span className="inline-flex items-center gap-1 text-blue-400 text-sm font-medium group-hover:gap-2 transition-all">
+                  {locale === "sq" ? "Mëso më shumë" : "Learn more"}
+                  <ChevronRight size={14} />
+                </span>
               </div>
-              <h3 className="text-white font-semibold text-lg mb-2">
-                {t(`${key}.title` as "courses.title" | "datatools.title" | "algorithms.title" | "casestudies.title")}
-              </h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                {t(`${key}.desc` as "courses.desc" | "datatools.desc" | "algorithms.desc" | "casestudies.desc")}
-              </p>
-              <span className="inline-flex items-center gap-1 text-blue-400 text-sm font-medium group-hover:gap-2 transition-all">
-                {t(`${key}.link` as "courses.link" | "datatools.link" | "algorithms.link" | "casestudies.link")}
-                <ChevronRight size={14} />
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
