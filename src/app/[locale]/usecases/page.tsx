@@ -17,7 +17,7 @@ type UseCase = {
 };
 
 const iconMap: Record<string, React.ReactNode> = {
-  map:      <MapPin size={24} className="text-blue-400" />,
+  map:      <MapPin size={24} className="text-blue-600" />,
   truck:    <Truck size={24} className="text-indigo-400" />,
   leaf:     <Leaf size={24} className="text-green-400" />,
   chart:    <BarChart3 size={24} className="text-violet-400" />,
@@ -26,19 +26,19 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 const bgMap: Record<string, string> = {
-  map: "bg-blue-500/10", truck: "bg-indigo-500/10", leaf: "bg-green-500/10",
-  chart: "bg-violet-500/10", building: "bg-cyan-500/10", trending: "bg-orange-500/10",
+  map: "bg-blue-100", truck: "bg-indigo-100", leaf: "bg-green-100",
+  chart: "bg-violet-100", building: "bg-cyan-100", trending: "bg-orange-100",
 };
 
 const domainColors: Record<string, string> = {
-  Government: "bg-blue-500/10 text-blue-400",
-  Logistics: "bg-indigo-500/10 text-indigo-400",
-  Environment: "bg-green-500/10 text-green-400",
-  Finance: "bg-violet-500/10 text-violet-400",
-  Healthcare: "bg-cyan-500/10 text-cyan-400",
-  "Real Estate": "bg-orange-500/10 text-orange-400",
-  Education: "bg-yellow-500/10 text-yellow-400",
-  Other: "bg-slate-500/10 text-slate-400",
+  Government: "bg-blue-100 text-blue-600",
+  Logistics: "bg-indigo-100 text-indigo-400",
+  Environment: "bg-green-100 text-green-400",
+  Finance: "bg-violet-100 text-violet-400",
+  Healthcare: "bg-cyan-100 text-cyan-400",
+  "Real Estate": "bg-orange-100 text-orange-400",
+  Education: "bg-yellow-100 text-yellow-400",
+  Other: "bg-slate-500/10 text-gray-500",
 };
 
 const staticCases: UseCase[] = [
@@ -61,14 +61,14 @@ export default function UseCasesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-950 pt-24 pb-20">
+    <div className="min-h-screen bg-blue-50 pt-24 pb-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
-          <p className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-3">InfoMat</p>
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+          <p className="text-blue-600 text-sm font-semibold uppercase tracking-widest mb-3">InfoMat</p>
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
             {locale === "sq" ? "Raste Përdorimi" : "Use Cases"}
           </h1>
-          <p className="text-slate-400 text-lg max-w-xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-xl mx-auto">
             {locale === "sq"
               ? "Shembuj realë të matematikës së aplikuar në zgjidhjen e problemeve komplekse"
               : "Real examples of applied mathematics solving complex problems"}
@@ -79,21 +79,21 @@ export default function UseCasesPage() {
           {cases.map((c) => {
             const iconKey = c.icon ?? "chart";
             return (
-              <div key={c._id} className="rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500/30 p-6 flex flex-col transition-all">
+              <div key={c._id} className="rounded-2xl bg-white border border-gray-200 hover:border-blue-300 p-6 flex flex-col transition-all">
                 <div className="flex items-center justify-between mb-4">
                   <div className={`w-10 h-10 rounded-xl ${bgMap[iconKey] ?? "bg-slate-700"} flex items-center justify-center`}>
                     {iconMap[iconKey]}
                   </div>
                   {c.domain && (
-                    <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${domainColors[c.domain] ?? "bg-slate-700 text-slate-300"}`}>
+                    <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${domainColors[c.domain] ?? "bg-slate-700 text-gray-700"}`}>
                       {c.domain}
                     </span>
                   )}
                 </div>
-                <h3 className="text-white font-semibold text-lg mb-3 leading-snug">
+                <h3 className="text-gray-900 font-semibold text-lg mb-3 leading-snug">
                   {locale === "sq" ? c.titleSq : c.titleEn}
                 </h3>
-                <p className="text-slate-400 text-sm leading-relaxed">
+                <p className="text-gray-500 text-sm leading-relaxed">
                   {locale === "sq" ? c.descSq : c.descEn}
                 </p>
               </div>

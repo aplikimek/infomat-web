@@ -40,13 +40,13 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 pt-24 pb-20">
+    <div className="min-h-screen bg-blue-50 pt-24 pb-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-14">
-          <p className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-3">InfoMat</p>
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">{t("title")}</h1>
-          <p className="text-slate-400 text-lg max-w-xl mx-auto">{t("subtitle")}</p>
+          <p className="text-blue-600 text-sm font-semibold uppercase tracking-widest mb-3">InfoMat</p>
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">{t("title")}</h1>
+          <p className="text-gray-500 text-lg max-w-xl mx-auto">{t("subtitle")}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
@@ -55,47 +55,47 @@ export default function ContactPage() {
             {submitted ? (
               <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
                 <CheckCircle size={48} className="text-green-400" />
-                <p className="text-white text-xl font-semibold">{t("success")}</p>
+                <p className="text-gray-900 text-xl font-semibold">{t("success")}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-sm text-slate-400 mb-2">{t("name")}</label>
+                    <label className="block text-sm text-gray-500 mb-2">{t("name")}</label>
                     <input
                       type="text"
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
                       placeholder="John Doe"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm text-slate-400 mb-2">{t("email")}</label>
+                    <label className="block text-sm text-gray-500 mb-2">{t("email")}</label>
                     <input
                       type="email"
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
                       placeholder="john@example.com"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm text-slate-400 mb-2">{t("subject")}</label>
+                  <label className="block text-sm text-gray-500 mb-2">{t("subject")}</label>
                   <input
                     type="text"
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
                     placeholder="GIS collaboration..."
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm text-slate-400 mb-2">{t("message")}</label>
+                  <label className="block text-sm text-gray-500 mb-2">{t("message")}</label>
                   <textarea
                     required
                     rows={6}
-                    className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 transition-colors resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 transition-colors resize-none"
                     placeholder="..."
                   />
                 </div>
@@ -118,17 +118,17 @@ export default function ContactPage() {
 
           {/* Contact Info */}
           <div className="lg:col-span-2">
-            <div className="rounded-2xl bg-slate-900 border border-slate-800 p-7 h-fit sticky top-24">
-              <h3 className="text-white font-semibold text-lg mb-6">{t("info_title")}</h3>
+            <div className="rounded-2xl bg-white border border-gray-200 p-7 h-fit sticky top-24">
+              <h3 className="text-gray-900 font-semibold text-lg mb-6">{t("info_title")}</h3>
               <ul className="space-y-5">
                 {settings.email && (
                   <li className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400">
+                    <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
                       <Mail size={18} />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 mb-0.5">Email</p>
-                      <a href={`mailto:${settings.email}`} className="text-slate-300 hover:text-blue-400 transition-colors text-sm">
+                      <p className="text-xs text-gray-400 mb-0.5">Email</p>
+                      <a href={`mailto:${settings.email}`} className="text-gray-700 hover:text-blue-600 transition-colors text-sm">
                         {settings.email}
                       </a>
                     </div>
@@ -136,13 +136,13 @@ export default function ContactPage() {
                 )}
                 {settings.github && (
                   <li className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-slate-700/50 flex items-center justify-center text-slate-400">
+                    <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500">
                       <GithubIcon size={18} />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 mb-0.5">GitHub</p>
+                      <p className="text-xs text-gray-400 mb-0.5">GitHub</p>
                       <a href={settings.github} target="_blank" rel="noopener noreferrer"
-                        className="text-slate-300 hover:text-blue-400 transition-colors text-sm">
+                        className="text-gray-700 hover:text-blue-600 transition-colors text-sm">
                         {settings.github.replace("https://", "")}
                       </a>
                     </div>
@@ -150,13 +150,13 @@ export default function ContactPage() {
                 )}
                 {settings.linkedin && (
                   <li className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-blue-700/20 flex items-center justify-center text-blue-400">
+                    <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
                       <LinkedinIcon size={18} />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 mb-0.5">LinkedIn</p>
+                      <p className="text-xs text-gray-400 mb-0.5">LinkedIn</p>
                       <a href={settings.linkedin} target="_blank" rel="noopener noreferrer"
-                        className="text-slate-300 hover:text-blue-400 transition-colors text-sm">
+                        className="text-gray-700 hover:text-blue-600 transition-colors text-sm">
                         {settings.linkedin.replace("https://", "")}
                       </a>
                     </div>

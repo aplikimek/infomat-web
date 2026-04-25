@@ -2,8 +2,8 @@
 @import "katex/dist/katex.min.css";
 
 :root {
-  --background: #0f172a;
-  --foreground: #e2e8f0;
+  --background: #f0f6ff;
+  --foreground: #0f172a;
 }
 
 body {

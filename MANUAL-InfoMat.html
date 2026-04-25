@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual – InfoMat Website</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; color: #1a1a2e; background: #fff; }
+
+  /* Cover page */
+  .cover {
+    height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1d4ed8 100%);
+    color: white; text-align: center; page-break-after: always;
+  }
+  .cover .logo { font-size: 52px; font-weight: 900; letter-spacing: -2px; margin-bottom: 8px; }
+  .cover .logo span { color: #60a5fa; }
+  .cover .logo-sub { font-size: 16px; color: #94a3b8; margin-bottom: 48px; letter-spacing: 2px; }
+  .cover h1 { font-size: 32px; font-weight: 700; margin-bottom: 12px; }
+  .cover p { font-size: 14px; color: #94a3b8; margin-bottom: 6px; }
+  .cover .version { margin-top: 60px; font-size: 12px; color: #475569; border-top: 1px solid #334155; padding-top: 20px; width: 300px; }
+
+  /* TOC */
+  .toc-page { padding: 60px 80px; page-break-after: always; }
+  .toc-page h2 { font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 30px; border-bottom: 3px solid #1d4ed8; padding-bottom: 10px; }
+  .toc-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dotted #d1d5db; font-size: 13px; }
+  .toc-item.chapter { font-weight: 700; color: #1e3a8a; margin-top: 14px; font-size: 14px; }
+  .toc-item.sub { padding-left: 20px; color: #475569; }
+  .toc-num { color: #6b7280; }
+
+  /* Content pages */
+  .page { padding: 50px 70px; page-break-after: always; max-width: 800px; margin: 0 auto; }
+  .page:last-child { page-break-after: auto; }
+
+  h1.chapter-title {
+    font-size: 26px; font-weight: 800; color: #1e3a8a;
+    border-left: 6px solid #1d4ed8; padding-left: 16px;
+    margin-bottom: 30px; margin-top: 10px;
+  }
+  h2.section { font-size: 17px; font-weight: 700; color: #1e40af; margin: 28px 0 12px; border-bottom: 2px solid #dbeafe; padding-bottom: 6px; }
+  h3.subsection { font-size: 14px; font-weight: 700; color: #374151; margin: 18px 0 8px; }
+  p { line-height: 1.75; color: #374151; margin-bottom: 10px; }
+  ul, ol { padding-left: 22px; margin-bottom: 12px; }
+  li { line-height: 1.8; color: #374151; margin-bottom: 2px; }
+
+  /* Info boxes */
+  .box { border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
+  .box.info { background: #eff6ff; border-left: 4px solid #3b82f6; }
+  .box.warn { background: #fffbeb; border-left: 4px solid #f59e0b; }
+  .box.tip  { background: #f0fdf4; border-left: 4px solid #22c55e; }
+  .box.danger { background: #fef2f2; border-left: 4px solid #ef4444; }
+  .box strong { display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .box.info strong { color: #1d4ed8; }
+  .box.warn strong { color: #d97706; }
+  .box.tip  strong { color: #16a34a; }
+  .box.danger strong { color: #dc2626; }
+
+  /* Code blocks */
+  code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 12px; color: #0f172a; }
+  pre { background: #0f172a; color: #e2e8f0; padding: 16px 20px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.6; margin: 12px 0; overflow-x: auto; }
+  pre .comment { color: #64748b; }
+  pre .key { color: #60a5fa; }
+  pre .val { color: #34d399; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 12px; }
+  th { background: #1e3a8a; color: white; padding: 10px 12px; text-align: left; font-weight: 600; }
+  td { padding: 9px 12px; border-bottom: 1px solid #e5e7eb; }
+  tr:nth-child(even) td { background: #f8fafc; }
+  tr:hover td { background: #eff6ff; }
+
+  /* Step badges */
+  .step { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: #1d4ed8; color: white; border-radius: 50%; font-weight: 700; font-size: 12px; margin-right: 8px; flex-shrink: 0; }
+  .step-row { display: flex; align-items: flex-start; margin-bottom: 12px; }
+  .step-row .step-content { flex: 1; padding-top: 3px; }
+
+  /* URL highlight */
+  .url { background: #dbeafe; color: #1d4ed8; padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 12px; font-weight: 600; }
+
+  /* Section badge */
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-right: 4px; }
+  .badge.blue { background: #dbeafe; color: #1d4ed8; }
+  .badge.green { background: #dcfce7; color: #16a34a; }
+  .badge.orange { background: #fef3c7; color: #d97706; }
+
+  /* Page footer */
+  @page { margin: 0; }
+  @media print {
+    .cover { height: 100vh; }
+    .page, .toc-page { page-break-after: always; }
+  }
+
+  .footer-note { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e5e7eb; font-size: 11px; color: #9ca3af; text-align: center; }
+
+  .panel-item { display: flex; align-items: center; padding: 10px 14px; background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 8px; gap: 12px; }
+  .panel-item .emoji { font-size: 20px; }
+  .panel-item .label { font-weight: 600; color: #1e3a8a; }
+  .panel-item .desc { font-size: 12px; color: #6b7280; }
+
+  .divider { border: none; border-top: 2px solid #e5e7eb; margin: 30px 0; }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <div class="logo">Info<span>Mat</span><span style="color:#475569;font-weight:400;font-size:28px">.app</span></div>
+  <div class="logo-sub">APPLIED MATHEMATICS &amp; GIS</div>
+  <h1>Manual Implementimi<br>dhe Menaxhimi</h1>
+  <p>Udhëzues i plotë për administrimin e website-it</p>
+  <p>infomat.app &nbsp;|&nbsp; Paneli Admin: infomat.app/studio</p>
+  <div class="version">
+    Versioni 1.1 &nbsp;|&nbsp; Prill 2026<br>
+    Krijuar me Next.js 16 · Sanity CMS · Vercel
+  </div>
+</div>
+
+<!-- ============ TABLE OF CONTENTS ============ -->
+<div class="toc-page">
+  <h2>Tabela e Përmbajtjes</h2>
+
+  <div class="toc-item chapter"><span>1. Struktura e Sistemit</span><span class="toc-num">3</span></div>
+  <div class="toc-item sub"><span>1.1 Pamje e përgjithshme</span><span class="toc-num">3</span></div>
+  <div class="toc-item sub"><span>1.2 Teknologjitë e përdorura</span><span class="toc-num">3</span></div>
+  <div class="toc-item sub"><span>1.3 Faqet e website-it</span><span class="toc-num">4</span></div>
+
+  <div class="toc-item chapter"><span>2. Paneli i Administrimit (Sanity Studio)</span><span class="toc-num">5</span></div>
+  <div class="toc-item sub"><span>2.1 Hyrja në panel</span><span class="toc-num">5</span></div>
+  <div class="toc-item sub"><span>2.2 Ndryshimi i cilësimeve dhe menusë</span><span class="toc-num">5</span></div>
+  <div class="toc-item sub"><span>2.3 Editimi i Hero seksionit</span><span class="toc-num">6</span></div>
+  <div class="toc-item sub"><span>2.4 Menaxhimi i Projekteve</span><span class="toc-num">6</span></div>
+  <div class="toc-item sub"><span>2.5 Shtimi i Kurseve</span><span class="toc-num">7</span></div>
+  <div class="toc-item sub"><span>2.6 Shkrimi i Artikujve (Blog)</span><span class="toc-num">7</span></div>
+  <div class="toc-item sub"><span>2.7 Menaxhimi i Rasteve të Përdorimit</span><span class="toc-num">8</span></div>
+  <div class="toc-item sub"><span>2.8 Editimi i Veçorive (Features)</span><span class="toc-num">9</span></div>
+  <div class="toc-item sub"><span>2.9 Editimi i Mjeteve (Tools)</span><span class="toc-num">9</span></div>
+  <div class="toc-item sub"><span>2.10 Editimi i "Rreth Nesh" (About)</span><span class="toc-num">9</span></div>
+  <div class="toc-item sub"><span>2.11 Ngarkimi i Imazheve</span><span class="toc-num">10</span></div>
+
+  <div class="toc-item chapter"><span>3. Menaxhimi i Domain-it (Cloudflare)</span><span class="toc-num">9</span></div>
+  <div class="toc-item sub"><span>3.1 Hyrja në Cloudflare</span><span class="toc-num">9</span></div>
+  <div class="toc-item sub"><span>3.2 DNS Records</span><span class="toc-num">9</span></div>
+
+  <div class="toc-item chapter"><span>4. Deployment (Vercel)</span><span class="toc-num">10</span></div>
+  <div class="toc-item sub"><span>4.1 Deploy automatik</span><span class="toc-num">10</span></div>
+  <div class="toc-item sub"><span>4.2 Ndryshimi i kodit dhe ri-deployment</span><span class="toc-num">10</span></div>
+  <div class="toc-item sub"><span>4.3 Variablat e mjedisit</span><span class="toc-num">11</span></div>
+
+  <div class="toc-item chapter"><span>5. Kodi Burimor (GitHub)</span><span class="toc-num">11</span></div>
+  <div class="toc-item sub"><span>5.1 Struktura e skedarëve</span><span class="toc-num">11</span></div>
+  <div class="toc-item sub"><span>5.2 Shtimi i faqeve të reja</span><span class="toc-num">12</span></div>
+
+  <div class="toc-item chapter"><span>6. Referenca e Shpejtë</span><span class="toc-num">13</span></div>
+</div>
+
+<!-- ============ CHAPTER 1 ============ -->
+<div class="page">
+  <h1 class="chapter-title">1. Struktura e Sistemit</h1>
+
+  <h2 class="section">1.1 Pamje e Përgjithshme</h2>
+  <p>Website-i InfoMat është ndërtuar mbi një arkitekturë moderne tre-shtresore:</p>
+
+  <pre><code><span class="comment">┌─────────────────────────────────────────────────────┐</span>
+<span class="comment">│                    SISTEMI InfoMat                  │</span>
+<span class="comment">├─────────────────────────────────────────────────────┤</span>
+<span class="key">  FRONTEND</span>   →  Next.js 16 (React) · TypeScript
+             →  infomat.app
+<span class="comment">├─────────────────────────────────────────────────────┤</span>
+<span class="key">  CMS ADMIN</span>  →  Sanity Studio
+             →  infomat.app/studio
+<span class="comment">├─────────────────────────────────────────────────────┤</span>
+<span class="key">  HOSTING</span>    →  Vercel (deploy automatik)
+<span class="key">  DOMAIN</span>     →  Cloudflare (DNS)
+<span class="key">  KOD</span>        →  GitHub (github.com/aplikimek/infomat-web)
+<span class="comment">└─────────────────────────────────────────────────────┘</span></code></pre>
+
+  <div class="box info">
+    <strong>Si funksionon lidhja</strong>
+    Kur ndryshoni diçka në <strong>Sanity Studio</strong>, të dhënat ruhen në cloud-in e Sanity dhe faqja i merr automatikisht pa pasur nevojë për ri-deployment.
+  </div>
+
+  <h2 class="section">1.2 Teknologjitë e Përdorura</h2>
+  <table>
+    <tr><th>Teknologjia</th><th>Roli</th><th>Versioni</th></tr>
+    <tr><td>Next.js</td><td>Framework kryesor i frontend-it</td><td>16.2</td></tr>
+    <tr><td>TypeScript</td><td>Siguri e tipave në kod</td><td>5.x</td></tr>
+    <tr><td>Tailwind CSS</td><td>Stilizimi vizual</td><td>4.x</td></tr>
+    <tr><td>next-intl</td><td>Gjuha dygjuhëshe (SQ/EN)</td><td>4.x</td></tr>
+    <tr><td>Sanity</td><td>Sistemi i menaxhimit të përmbajtjes (CMS)</td><td>3.x</td></tr>
+    <tr><td>KaTeX</td><td>Renderimi i formulave matematike</td><td>0.16</td></tr>
+    <tr><td>Vercel</td><td>Hosting dhe deployment</td><td>—</td></tr>
+    <tr><td>Cloudflare</td><td>DNS dhe domain menaxhim</td><td>—</td></tr>
+  </table>
+
+  <h2 class="section">1.3 Faqet e Website-it</h2>
+  <table>
+    <tr><th>Faqja</th><th>URL (SQ)</th><th>Përshkrimi</th></tr>
+    <tr><td>Kryefaqja</td><td>/sq</td><td>Hero, Features, Tools, Shërbimet</td></tr>
+    <tr><td>Veçoritë</td><td>/sq/features</td><td>4 veçoritë kryesore të platformës</td></tr>
+    <tr><td>Mjetet</td><td>/sq/tools</td><td>Kalkulatorë dhe mjete interaktive</td></tr>
+    <tr><td>Kurset</td><td>/sq/courses</td><td>Lista e kurseve (merret nga Sanity)</td></tr>
+    <tr><td>Raste Përdorimi</td><td>/sq/usecases</td><td>Shembuj realë (merret nga Sanity)</td></tr>
+    <tr><td>Projektet</td><td>/sq/projects</td><td>Portfolio projektesh (merret nga Sanity)</td></tr>
+    <tr><td>Blog</td><td>/sq/blog</td><td>Artikuj me formula LaTeX (merret nga Sanity)</td></tr>
+    <tr><td>Rreth Nesh</td><td>/sq/about</td><td>Informacion rreth InfoMat (merret nga Sanity)</td></tr>
+    <tr><td>Kontakt</td><td>/sq/contact</td><td>Formë kontakti</td></tr>
+    <tr><td><strong>Studio Admin</strong></td><td>/studio</td><td>Paneli i administrimit</td></tr>
+  </table>
+
+  <div class="box tip">
+    <strong>Bilingual (Dygjuhësh)</strong>
+    Çdo faqe ekziston në dy gjuhë. Për anglisht, zëvendësoni <code>/sq/</code> me <code>/en/</code> në URL. Butonin e gjuhës e gjeni lart djathtas në faqe.
+  </div>
+</div>
+
+<!-- ============ CHAPTER 2 ============ -->
+<div class="page">
+  <h1 class="chapter-title">2. Paneli i Administrimit (Sanity Studio)</h1>
+
+  <h2 class="section">2.1 Hyrja në Panel</h2>
+
+  <div class="step-row"><span class="step">1</span><div class="step-content">Hapni shfletuesin dhe shkoni te: <span class="url">https://infomat.app/studio</span></div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Klikoni <strong>"Log in with"</strong> → zgjidhni llogarinë tuaj Google ose GitHub (të njëjtën me të cilën jeni regjistruar në sanity.io)</div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Klikoni <strong>"Structure"</strong> në shiritin e sipërm për të parë të gjitha seksionet</div></div>
+
+  <p>Paneli juaj i administrimit ka këtë strukturë:</p>
+
+  <div class="panel-item"><span class="emoji">⚙️</span><div><div class="label">Cilësimet &amp; Menu</div><div class="desc">Emri i faqes, email, linqe sociale, menuja e navigimit</div></div></div>
+  <div class="panel-item"><span class="emoji">🏠</span><div><div class="label">Hero (Faqja Kryesore)</div><div class="desc">Titulli kryesor, nëntitulli, butonët, imazhi djathtas</div></div></div>
+  <div class="panel-item"><span class="emoji">⭐</span><div><div class="label">Veçoritë (Features)</div><div class="desc">4 kartat e veçorive me titull dhe përshkrim</div></div></div>
+  <div class="panel-item"><span class="emoji">🔧</span><div><div class="label">Mjetet (Tools)</div><div class="desc">Seksioni i mjeteve interaktive</div></div></div>
+  <div class="panel-item"><span class="emoji">ℹ️</span><div><div class="label">Rreth Nesh (About)</div><div class="desc">Teksti i prezantimit dhe foto</div></div></div>
+  <div class="panel-item"><span class="emoji">🎓</span><div><div class="label">Kurset</div><div class="desc">Lista e kurseve (shtoni/editoni/fshini)</div></div></div>
+  <div class="panel-item"><span class="emoji">💡</span><div><div class="label">Raste Përdorimi</div><div class="desc">Shembujt e aplikimeve reale</div></div></div>
+  <div class="panel-item"><span class="emoji">📁</span><div><div class="label">Projektet</div><div class="desc">Portfolio i projekteve GIS dhe OR</div></div></div>
+  <div class="panel-item"><span class="emoji">📝</span><div><div class="label">Blog Artikujt</div><div class="desc">Artikujt me tekst të pasur dhe formula matematike</div></div></div>
+
+  <h2 class="section">2.2 Ndryshimi i Cilësimeve dhe Menusë</h2>
+
+  <div class="step-row"><span class="step">1</span><div class="step-content">Klikoni <strong>⚙️ Cilësimet &amp; Menu</strong></div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Ndryshoni fushat sipas nevojës:
+    <ul style="margin-top:6px">
+      <li><strong>Emri i Faqes</strong> – shfaqet si titull i browser-it</li>
+      <li><strong>Slogani</strong> – teksti i shkurtër nën logo në footer</li>
+      <li><strong>Email Kontakti</strong> – adresa email që shfaqet në footer dhe kontakt</li>
+      <li><strong>GitHub / LinkedIn URL</strong> – linqet e rrjeteve sociale</li>
+      <li><strong>Menu (Navigimi)</strong> – klikoni <strong>"Add item"</strong> për të shtuar lidhje të reja</li>
+    </ul>
+  </div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Klikoni <strong>"Publish"</strong> (butoni i gjelbër lart djathtas) për të ruajtur ndryshimet</div></div>
+
+  <div class="box warn">
+    <strong>⚠️ Kujdes</strong>
+    Ndryshimet ruhen si <em>Draft</em> derisa të klikoni <strong>Publish</strong>. Nëse mbyllni faqen pa Publish, ndryshimet humbasin.
+  </div>
+</div>
+
+<div class="page">
+  <h2 class="section">2.3 Editimi i Hero Seksionit</h2>
+  <p>Hero seksioni është pjesa e parë që sheh vizitori kur hap faqen kryesore.</p>
+
+  <div class="step-row"><span class="step">1</span><div class="step-content">Klikoni <strong>🏠 Hero (Faqja Kryesore)</strong></div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Ndryshoni fushat:
+    <ul style="margin-top:6px">
+      <li><strong>Badge teksti</strong> – teksti i vogël mbi titull (p.sh. "MATEMATIKË E APLIKUAR")</li>
+      <li><strong>Titulli Rreshti 1</strong> – fjala/frazë e parë (p.sh. "Ku Matematika")</li>
+      <li><strong>Titulli Rreshti 2 me ngjyrë</strong> – fraza me ngjyrë blu (p.sh. "Takon Aplikimin")</li>
+      <li><strong>Nëntitulli</strong> – teksti shpjegues nën titull</li>
+      <li><strong>Butoni kryesor / dytësor</strong> – teksti i butonëve</li>
+      <li><strong>Imazhi Hero</strong> – imazhi që shfaqet djathtas (klikoni "Upload" ose "Select")</li>
+    </ul>
+  </div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Plotësoni të njëjtat fusha edhe për anglisht (fushat me mbiemrin "EN")</div></div>
+  <div class="step-row"><span class="step">4</span><div class="step-content">Klikoni <strong>Publish</strong></div></div>
+
+  <h2 class="section">2.4 Menaxhimi i Projekteve</h2>
+
+  <h3 class="subsection">Shtimi i Projektit të Ri</h3>
+  <div class="step-row"><span class="step">1</span><div class="step-content">Klikoni <strong>📁 Projektet</strong> → butoni <strong>"+"</strong> lart djathtas</div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Plotësoni formularin:
+    <ul style="margin-top:6px">
+      <li><strong>Titulli (EN/SQ)</strong> – emri i projektit</li>
+      <li><strong>Kategoria</strong> – zgjidhni: GIS / Operational Research / Statistics / Visualization</li>
+      <li><strong>Përshkrimi (EN/SQ)</strong> – teksti shpjegues</li>
+      <li><strong>Etiketat</strong> – teknologjitë e përdorura (Python, QGIS, etj.) – shtypni Enter pas çdo etikete</li>
+      <li><strong>Imazhi</strong> – screenshot i projektit</li>
+      <li><strong>Linku Live</strong> – URL e projektit live (opsionale)</li>
+      <li><strong>Kodi Burimor</strong> – URL e GitHub (opsionale)</li>
+      <li><strong>Renditja</strong> – numri i renditjes (0 = i pari)</li>
+    </ul>
+  </div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Klikoni <strong>Publish</strong></div></div>
+
+  <h3 class="subsection">Editimi i Projektit Ekzistues</h3>
+  <ul>
+    <li>Klikoni projektin nga lista → bëni ndryshimet → klikoni <strong>Publish</strong></li>
+  </ul>
+
+  <h3 class="subsection">Fshirja e Projektit</h3>
+  <ul>
+    <li>Hapni projektin → klikoni <strong>"..."</strong> (tre pikat) lart djathtas → <strong>"Delete"</strong></li>
+  </ul>
+
+  <div class="box danger">
+    <strong>⛔ Fshirja është e pakthyeshme!</strong>
+    Pasi fshini një projekt, nuk mund ta riktheni. Sigurohuni para se të klikoni Delete.
+  </div>
+</div>
+
+<div class="page">
+  <h2 class="section">2.5 Shtimi i Kurseve</h2>
+
+  <div class="step-row"><span class="step">1</span><div class="step-content">Klikoni <strong>🎓 Kurset</strong> → butoni <strong>"+"</strong></div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Plotësoni:
+    <ul style="margin-top:6px">
+      <li><strong>Titulli (SQ/EN)</strong> – emri i kursit</li>
+      <li><strong>Përshkrimi (SQ/EN)</strong> – çfarë mbulon kursi</li>
+      <li><strong>Niveli</strong> – Fillues / Mesatar / Avancuar</li>
+      <li><strong>Kohëzgjatja</strong> – p.sh. "8 javë" / "8 weeks"</li>
+      <li><strong>Linku i Kursit</strong> – URL ku mund ta aksesojnë studentët (opsionale)</li>
+      <li><strong>Renditja</strong> – numri i renditjes në faqe</li>
+    </ul>
+  </div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Klikoni <strong>Publish</strong></div></div>
+
+  <div class="box info">
+    <strong>ℹ️ Renditja e kurseve</strong>
+    Kurset renditen sipas fushës <strong>Renditja</strong>. Vendosni 1 për kursin e parë, 2 për të dytin, etj. Nëse dy kurse kanë të njëjtin numër, renditen sipas datës së krijimit.
+  </div>
+
+  <h2 class="section">2.6 Shkrimi i Artikujve (Blog)</h2>
+
+  <div class="step-row"><span class="step">1</span><div class="step-content">Klikoni <strong>📝 Blog Artikujt</strong> → butoni <strong>"+"</strong></div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Plotësoni:
+    <ul style="margin-top:6px">
+      <li><strong>Titulli (EN/SQ)</strong> – titulli i artikullit</li>
+      <li><strong>Slug (URL)</strong> – klikoni <strong>"Generate"</strong> – krijohet automatikisht</li>
+      <li><strong>Kategoria</strong> – GIS / Operational Research / Statistics / Algorithms</li>
+      <li><strong>Data e Publikimit</strong> – zgjidhni datën</li>
+      <li><strong>Kohëzgjatja (minuta lexim)</strong> – numri i minutave</li>
+      <li><strong>Përmbledhja e shkurtër (EN/SQ)</strong> – 2-3 fjali shpjeguese</li>
+      <li><strong>Formula LaTeX</strong> – formula kryesore e artikullit (opsionale)</li>
+      <li><strong>Imazhi Kryesor</strong> – foto cover (opsionale)</li>
+      <li><strong>Përmbajtja (EN/SQ)</strong> – teksti i plotë i artikullit</li>
+    </ul>
+  </div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Klikoni <strong>Publish</strong></div></div>
+
+  <h3 class="subsection">Shkrimi i Formulave LaTeX</h3>
+  <p>Fushat <strong>Formula LaTeX</strong> pranojnë sintaksën standarde të LaTeX. Shembuj:</p>
+
+  <table>
+    <tr><th>Çfarë shkruani</th><th>Çfarë shfaqet</th></tr>
+    <tr><td><code>\min_{x} c^T x</code></td><td>min cᵀx</td></tr>
+    <tr><td><code>\sum_{i=1}^{n} x_i</code></td><td>∑ xᵢ (i=1 deri n)</td></tr>
+    <tr><td><code>\sqrt{x^2 + y^2}</code></td><td>√(x²+y²)</td></tr>
+    <tr><td><code>Ax \leq b, \; x \geq 0</code></td><td>Ax ≤ b, x ≥ 0</td></tr>
+    <tr><td><code>\int_a^b f(x)\,dx</code></td><td>∫ₐᵇ f(x) dx</td></tr>
+    <tr><td><code>\frac{d}{dx} f(x)</code></td><td>d/dx f(x)</td></tr>
+  </table>
+</div>
+
+<div class="page">
+  <h2 class="section">2.7 Menaxhimi i Rasteve të Përdorimit</h2>
+
+  <div class="step-row"><span class="step">1</span><div class="step-content">Klikoni <strong>💡 Raste Përdorimi</strong> → butoni <strong>"+"</strong></div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Plotësoni:
+    <ul style="margin-top:6px">
+      <li><strong>Titulli (SQ/EN)</strong></li>
+      <li><strong>Përshkrimi (SQ/EN)</strong> – 2-3 fjali</li>
+      <li><strong>Sektori (Domain)</strong> – Government / Logistics / Environment / Finance / Healthcare / Real Estate / Education / Other</li>
+      <li><strong>Ikona</strong> – zgjidhni ikonën (map, truck, leaf, chart, building, trending)</li>
+      <li><strong>Renditja</strong> – numri i renditjes</li>
+    </ul>
+  </div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Klikoni <strong>Publish</strong></div></div>
+
+  <h2 class="section">2.8 Editimi i Veçorive (Features)</h2>
+  <p>Seksioni <em>"Veçori të Fuqishme"</em> në faqen kryesore ka 4 karta që mund t'i ndryshoni plotësisht nga Studio.</p>
+
+  <div class="step-row"><span class="step">1</span><div class="step-content">Klikoni <strong>⭐ Veçoritë (Features)</strong> → "Create new document" (nëse nuk ekziston)</div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Plotësoni titullin e seksionit (SQ dhe EN)</div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Te <strong>"Kartat e Veçorive"</strong> klikoni <strong>"Add item"</strong> dhe për çdo kartë plotësoni:
+    <ul style="margin-top:6px">
+      <li><strong>Titulli (SQ/EN)</strong> – emri i kartës</li>
+      <li><strong>Përshkrimi (SQ/EN)</strong> – 1-2 fjali shpjeguese</li>
+      <li><strong>Ikona</strong> – zgjidhni nga lista: <code>courses</code> / <code>datatools</code> / <code>algorithms</code> / <code>casestudies</code></li>
+    </ul>
+  </div></div>
+  <div class="step-row"><span class="step">4</span><div class="step-content">Klikoni <strong>Publish</strong></div></div>
+
+  <h2 class="section">2.9 Editimi i Mjeteve (Tools)</h2>
+  <p>Faqja <strong>/tools</strong> tregon 3 kartë mjetesh (Matrix Calculator, Function Plotter, Regression Analysis).</p>
+
+  <div class="step-row"><span class="step">1</span><div class="step-content">Klikoni <strong>🔧 Mjetet (Tools)</strong> → "Create new document"</div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Plotësoni titullin dhe përshkrimin e faqes (SQ/EN)</div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Te <strong>"Mjetet"</strong> shtoni 3 kartë, secila me:
+    <ul style="margin-top:6px">
+      <li><strong>Emri (SQ/EN)</strong> – titulli i mjetit</li>
+      <li><strong>Përshkrimi (SQ/EN)</strong></li>
+      <li><strong>Lloji</strong> – <code>matrix</code> / <code>plotter</code> / <code>regression</code> (ndryshon ikonën)</li>
+      <li><strong>Linku i Mjetit</strong> – URL ku çon butoni "Open Tool" (opsionale)</li>
+    </ul>
+  </div></div>
+  <div class="step-row"><span class="step">4</span><div class="step-content">Klikoni <strong>Publish</strong></div></div>
+
+  <h2 class="section">2.10 Editimi i "Rreth Nesh" (About)</h2>
+
+  <div class="step-row"><span class="step">1</span><div class="step-content">Klikoni <strong>ℹ️ Rreth Nesh (About)</strong> → "Create new document"</div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Plotësoni fushat:
+    <ul style="margin-top:6px">
+      <li><strong>Titulli (SQ/EN)</strong> – p.sh. "Rreth InfoMat" / "About InfoMat"</li>
+      <li><strong>Nëntitulli (SQ/EN)</strong> – p.sh. "Kush jemi ne"</li>
+      <li><strong>Paragrafi 1 dhe 2 (SQ/EN)</strong> – teksti përshkrues</li>
+      <li><strong>Foto</strong> – imazh opsional për anën djathtas (nëse nuk vendoset, shfaqet kutia me kod)</li>
+    </ul>
+  </div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Klikoni <strong>Publish</strong></div></div>
+
+  <div class="box info">
+    <strong>ℹ️ Email dhe Linqet Sociale (faqja Contact)</strong>
+    Email-i, GitHub-u dhe LinkedIn-i që shfaqen në faqen Contact menaxhohen nga <strong>⚙️ Cilësimet e Faqes</strong> → fushat <em>Email Kontakti</em>, <em>GitHub URL</em>, <em>LinkedIn URL</em>.
+  </div>
+
+  <h2 class="section">2.11 Ngarkimi i Imazheve</h2>
+
+  <p>Imazhet mund t'i ngarkoni në çdo fushë të tipit "Image" në Studio:</p>
+
+  <div class="step-row"><span class="step">1</span><div class="step-content">Klikoni fushën e imazhit</div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Zgjidhni një opsion:
+    <ul style="margin-top:6px">
+      <li><strong>Upload</strong> – ngarkoni nga kompjuteri juaj</li>
+      <li><strong>Select</strong> – zgjidhni nga imazhet e ngarkohet më parë</li>
+    </ul>
+  </div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Vendosni pikën e fokusit duke klikuar mbi imazhin (rrathë i vogël)</div></div>
+
+  <div class="box tip">
+    <strong>✅ Rekomandimet për imazhe</strong>
+    <ul>
+      <li>Formati: <strong>JPG</strong> ose <strong>PNG</strong> (WebP pranohet gjithashtu)</li>
+      <li>Madhësia: maksimumi <strong>2MB</strong> për performancë optimale</li>
+      <li>Dimensionet: minimum <strong>800×600px</strong> për hero, <strong>400×300px</strong> për projekte</li>
+      <li>Sanity i optimizon dhe i kthen automatikisht në formatin WebP</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ CHAPTER 3 ============ -->
+<div class="page">
+  <h1 class="chapter-title">3. Menaxhimi i Domain-it (Cloudflare)</h1>
+
+  <h2 class="section">3.1 Hyrja në Cloudflare</h2>
+
+  <div class="step-row"><span class="step">1</span><div class="step-content">Shkoni te <span class="url">https://dash.cloudflare.com</span></div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Kyçuni me llogarinë tuaj (email: <strong>sh.kuka@gmail.com</strong>)</div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Klikoni domain-in <strong>infomat.app</strong></div></div>
+
+  <h2 class="section">3.2 DNS Records</h2>
+  <p>DNS records aktuale të konfiguruara për <strong>infomat.app</strong>:</p>
+
+  <table>
+    <tr><th>Type</th><th>Name</th><th>Content</th><th>Proxy</th><th>Qëllimi</th></tr>
+    <tr><td>A</td><td>@</td><td>76.76.21.21</td><td>DNS Only</td><td>Root domain → Vercel</td></tr>
+    <tr><td>CNAME</td><td>www</td><td>cname.vercel-dns.com</td><td>DNS Only</td><td>www → Vercel</td></tr>
+    <tr><td>TXT</td><td>_vercel</td><td>vc-domain-verify=...</td><td>DNS Only</td><td>Verifikimi i Vercel</td></tr>
+  </table>
+
+  <div class="box warn">
+    <strong>⚠️ Mos ndryshoni DNS records</strong>
+    Nëse ndryshoni ose fshini këto records, website-i mund të dalë jashtë linje. Ndryshoni vetëm nëse Vercel ju kërkon specifike.
+  </div>
+
+  <h3 class="subsection">Shtimi i Email-it (opsionale)</h3>
+  <p>Nëse dëshironi të merrni email në <strong>info@infomat.app</strong>, duhet të shtoni MX records. Rekomandueset shërbime falas:</p>
+  <ul>
+    <li><strong>Cloudflare Email Routing</strong> – ridrejton emailet te Gmail juaj (falas)</li>
+    <li><strong>Google Workspace</strong> – email profesional (me pagesë)</li>
+  </ul>
+
+  <p>Për Cloudflare Email Routing:</p>
+  <div class="step-row"><span class="step">1</span><div class="step-content">Menuja e majtë → <strong>Email</strong> → <strong>Email Routing</strong></div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Aktivizoni dhe shtoni rregullin: <code>info@infomat.app</code> → <code>sh.kuka@gmail.com</code></div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Cloudflare shton automatikisht MX records</div></div>
+</div>
+
+<!-- ============ CHAPTER 4 ============ -->
+<div class="page">
+  <h1 class="chapter-title">4. Deployment (Vercel)</h1>
+
+  <h2 class="section">4.1 Deploy Automatik</h2>
+  <p>Çdo herë që bëni <strong>git push</strong> në GitHub, Vercel ndez automatikisht një deploy të ri:</p>
+
+  <pre><code><span class="comment"># Procesi automatik:</span>
+Git Push → GitHub → Vercel zbuloni ndryshimin
+         → Build Next.js (~2 min)
+         → Deploy në infomat.app</code></pre>
+
+  <p>Mund ta ndiqni statusin e deploy-it te: <span class="url">https://vercel.com/dashboard</span></p>
+
+  <h2 class="section">4.2 Ndryshimi i Kodit dhe Ri-Deployment</h2>
+  <p>Kur bëni ndryshime në kod nga VSCode / Claude Code:</p>
+
+  <pre><code><span class="comment"># 1. Ruani ndryshimet e skedarëve</span>
+<span class="comment"># 2. Hapni terminal dhe ekzekutoni:</span>
+
+<span class="key">git</span> add .
+<span class="key">git</span> commit -m "<span class="val">Përshkrimi i ndryshimit</span>"
+<span class="key">git</span> push origin main
+
+<span class="comment"># Vercel fillon automatikisht deploy-in</span></code></pre>
+
+  <div class="box info">
+    <strong>ℹ️ Direktoria e Projektit</strong>
+    Kodi burimor gjendet te: <code>C:\Projekte\website\mywebsite\</code>
+  </div>
+
+  <h2 class="section">4.3 Variablat e Mjedisit (Environment Variables)</h2>
+  <p>Nëse keni nevojë të shtoni çelësa API ose konfigurime sekrete:</p>
+
+  <div class="step-row"><span class="step">1</span><div class="step-content">Shkoni te <span class="url">vercel.com/dashboard</span> → projekti <strong>infomat-web</strong></div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Settings → <strong>Environment Variables</strong></div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Shtoni variablin: <code>KEY = VALUE</code> → zgjidhni <strong>Production</strong> → Save</div></div>
+
+  <table>
+    <tr><th>Variable</th><th>Vlera</th><th>Qëllimi</th></tr>
+    <tr><td><code>NEXT_PUBLIC_SANITY_PROJECT_ID</code></td><td>n6umd8u9</td><td>ID e projektit Sanity</td></tr>
+    <tr><td><code>NEXT_PUBLIC_SANITY_DATASET</code></td><td>production</td><td>Dataset-i Sanity</td></tr>
+  </table>
+
+  <div class="box tip">
+    <strong>✅ Rifreskim pas ndryshimit të variables</strong>
+    Pas shtimit të variablave të reja, bëni një <strong>Redeploy</strong> manual te Vercel: Deployments → tre pikat → Redeploy.
+  </div>
+</div>
+
+<!-- ============ CHAPTER 5 ============ -->
+<div class="page">
+  <h1 class="chapter-title">5. Kodi Burimor (GitHub)</h1>
+
+  <h2 class="section">5.1 Struktura e Skedarëve</h2>
+
+  <pre><code>mywebsite/
+<span class="key">├── messages/</span>              <span class="comment"># Përkthimet</span>
+│   ├── sq.json            <span class="comment"># Shqip</span>
+│   └── en.json            <span class="comment"># Anglisht</span>
+<span class="key">├── public/</span>                <span class="comment"># Imazhe statike</span>
+│   └── hero-math.png
+<span class="key">├── src/</span>
+│   <span class="key">├── app/</span>
+│   │   <span class="key">├── [locale]/</span>         <span class="comment"># Të gjitha faqet</span>
+│   │   │   ├── page.tsx       <span class="comment"># Kryefaqja</span>
+│   │   │   ├── courses/
+│   │   │   ├── projects/
+│   │   │   ├── blog/
+│   │   │   ├── about/
+│   │   │   ├── contact/
+│   │   │   ├── features/
+│   │   │   ├── tools/
+│   │   │   └── usecases/
+│   │   <span class="key">└── studio/</span>            <span class="comment"># Sanity Studio</span>
+│   <span class="key">├── components/</span>           <span class="comment"># Komponentet React</span>
+│   │   ├── Header.tsx
+│   │   ├── Footer.tsx
+│   │   ├── MathFormula.tsx
+│   │   └── SocialIcons.tsx
+│   <span class="key">├── sanity/</span>               <span class="comment"># Konfigurimi Sanity</span>
+│   │   ├── schemas/           <span class="comment"># Strukturat e të dhënave</span>
+│   │   ├── lib/               <span class="comment"># Client, queries, image</span>
+│   │   └── sanity.config.ts
+│   <span class="key">└── i18n/</span>                 <span class="comment"># Konfigurimi i gjuhëve</span>
+└── next.config.ts</code></pre>
+
+  <h2 class="section">5.2 Shtimi i Faqes së Re</h2>
+  <p>Për të shtuar një faqe të re (p.sh. <code>/sq/gallery</code>):</p>
+
+  <div class="step-row"><span class="step">1</span><div class="step-content">Krijoni folderin: <code>src/app/[locale]/gallery/</code></div></div>
+  <div class="step-row"><span class="step">2</span><div class="step-content">Krijoni skedarin: <code>page.tsx</code> me strukturën bazë:
+<pre style="margin-top:8px"><code>export default function GalleryPage() {
+  return (
+    &lt;div className="min-h-screen bg-slate-950 pt-24 pb-20"&gt;
+      &lt;div className="max-w-6xl mx-auto px-4"&gt;
+        &lt;h1&gt;Gallery&lt;/h1&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  </div></div>
+  <div class="step-row"><span class="step">3</span><div class="step-content">Shtoni linkun në Header.tsx te lista <code>navLinks</code></div></div>
+  <div class="step-row"><span class="step">4</span><div class="step-content">Bëni <code>git add . && git commit -m "Add gallery page" && git push</code></div></div>
+
+  <h2 class="section">5.3 Ndryshimi i Ngjyrave / Stilit</h2>
+  <p>Sistemi përdor ngjyra nga paleta <strong>Tailwind CSS (slate/blue)</strong>. Ngjyrat kryesore:</p>
+  <table>
+    <tr><th>Element</th><th>Klasa Tailwind</th><th>Ngjyra</th></tr>
+    <tr><td>Background kryesor</td><td><code>bg-slate-950</code></td><td>#020617</td></tr>
+    <tr><td>Background karta</td><td><code>bg-slate-900</code></td><td>#0f172a</td></tr>
+    <tr><td>Akçent kryesor</td><td><code>text-blue-400</code></td><td>#60a5fa</td></tr>
+    <tr><td>Tekst kryesor</td><td><code>text-white</code></td><td>#ffffff</td></tr>
+    <tr><td>Tekst dytësor</td><td><code>text-slate-400</code></td><td>#94a3b8</td></tr>
+  </table>
+</div>
+
+<!-- ============ CHAPTER 6 - QUICK REFERENCE ============ -->
+<div class="page">
+  <h1 class="chapter-title">6. Referenca e Shpejtë</h1>
+
+  <h2 class="section">URL-t e Rëndësishme</h2>
+  <table>
+    <tr><th>Shërbimi</th><th>URL</th><th>Qëllimi</th></tr>
+    <tr><td>Website</td><td><code>https://infomat.app</code></td><td>Faqja kryesore</td></tr>
+    <tr><td>Admin Panel</td><td><code>https://infomat.app/studio</code></td><td>Menaxhimi i përmbajtjes</td></tr>
+    <tr><td>Vercel Dashboard</td><td><code>https://vercel.com/dashboard</code></td><td>Deploy &amp; Hosting</td></tr>
+    <tr><td>Sanity Manage</td><td><code>https://sanity.io/manage</code></td><td>CMS &amp; CORS Settings</td></tr>
+    <tr><td>Cloudflare</td><td><code>https://dash.cloudflare.com</code></td><td>DNS &amp; Domain</td></tr>
+    <tr><td>GitHub Repo</td><td><code>https://github.com/aplikimek/infomat-web</code></td><td>Kodi burimor</td></tr>
+  </table>
+
+  <h2 class="section">Llogaritë dhe Kredencialet</h2>
+  <table>
+    <tr><th>Shërbimi</th><th>Email/Username</th><th>Mënyra e kyçjes</th></tr>
+    <tr><td>Cloudflare</td><td>sh.kuka@gmail.com</td><td>Email + password</td></tr>
+    <tr><td>Vercel</td><td>GitHub OAuth</td><td>Continue with GitHub</td></tr>
+    <tr><td>Sanity Studio</td><td>GitHub OAuth</td><td>Log in (çdo browser)</td></tr>
+    <tr><td>GitHub</td><td>aplikimek</td><td>Email + password</td></tr>
+  </table>
+
+  <div class="box warn">
+    <strong>⚠️ Siguria e Llogarive</strong>
+    Mos ndani kredencialet me persona të paautorizuar. Sanity Studio është e aksesueshme nga çdokush që ka URL-në – sigurohuni që vetëm ju keni akses te llogaritë e lidhura.
+  </div>
+
+  <h2 class="section">Komandat Git të Shpeshta</h2>
+  <pre><code><span class="comment"># Shiko statusin e ndryshimeve</span>
+<span class="key">git</span> status
+
+<span class="comment"># Shiko ndryshimet e bëra</span>
+<span class="key">git</span> diff
+
+<span class="comment"># Ruaj dhe dërgo ndryshimet</span>
+<span class="key">git</span> add .
+<span class="key">git</span> commit -m "<span class="val">Mesazhi i ndryshimit</span>"
+<span class="key">git</span> push origin main
+
+<span class="comment"># Rikthe ndryshimin e fundit (para commit-it)</span>
+<span class="key">git</span> checkout -- .
+
+<span class="comment"># Shiko historikun e commit-eve</span>
+<span class="key">git</span> log --oneline -10</code></pre>
+
+  <h2 class="section">Zgjidhja e Problemeve të Shpeshta</h2>
+  <table>
+    <tr><th>Problemi</th><th>Zgjidhja</th></tr>
+    <tr><td>Faqja nuk u përditësua pas Publish në Studio</td><td>Prisni 30 sekonda, rifreshoni browser-in (Ctrl+F5)</td></tr>
+    <tr><td>Deploy dështoi në Vercel</td><td>Vercel Dashboard → Deployments → shikoni log-et e gabimit</td></tr>
+    <tr><td>Studio nuk hapet (CORS error)</td><td>sanity.io/manage → API → CORS → shtoni infomat.app</td></tr>
+    <tr><td>Domain nuk funksionon</td><td>Cloudflare → DNS → verifikoni se records janë aktive</td></tr>
+    <tr><td>SSL error (Not Secure)</td><td>Prisni 24h pas ndryshimit të DNS. Cloudflare / Vercel e lëshojnë automatikisht</td></tr>
+    <tr><td>Formulat matematike nuk shfaqen</td><td>Verifikoni sintaksën LaTeX. Shikoni tabelën e shembujve në seksionin 2.6</td></tr>
+    <tr><td>Studio ridrejton te <code>/en/structure</code> pas refresh</td><td>U rregullua automatikisht (basePath: /studio). Asgjë nuk duhet bërë.</td></tr>
+  </table>
+
+  <hr class="divider">
+
+  <div class="footer-note">
+    <p><strong>InfoMat.app</strong> – Manual Implementimi dhe Menaxhimi &nbsp;|&nbsp; Versioni 1.1 &nbsp;|&nbsp; Prill 2026</p>
+    <p>Ndërtuar me Next.js 16 · Sanity CMS · Vercel · Cloudflare</p>
+    <p>Për ndihmë teknike: <strong>infomat.app/contact</strong></p>
+  </div>
+</div>
+
+</body>
+</html>

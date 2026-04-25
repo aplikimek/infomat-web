@@ -7,7 +7,12 @@
       "Bash(mkdir -p /c/Projekte/website/mywebsite/src/app/\\\\[locale\\\\]/usecases)",
       "Bash(mkdir -p /c/Projekte/website/mywebsite/src/app/\\\\[locale\\\\]/about)",
       "Bash(node -e \"require\\('sanity'\\); console.log\\('sanity ok'\\)\")",
-      "Bash(node -e \"require\\('next-sanity'\\); console.log\\('ok'\\)\")"
+      "Bash(node -e \"require\\('next-sanity'\\); console.log\\('ok'\\)\")",
+      "Bash(where chrome *)",
+      "Bash(where \"chrome.exe\")",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Bash(\"/c/Program Files/Google/Chrome/Application/chrome.exe\" --headless --disable-gpu --print-to-pdf=\"c:/Projekte/website/mywebsite/MANUAL-InfoMat.pdf\" --print-to-pdf-no-header \"file:///c:/Projekte/website/mywebsite/MANUAL-InfoMat.html\")",
+      "Bash(echo \"Exit: $?\")"
     ],
     "additionalDirectories": [
       "C:\\Projekte\\website\\mywebsite\\src\\app\\studio"
