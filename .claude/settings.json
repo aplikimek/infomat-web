@@ -5,7 +5,12 @@
       "Bash(mkdir -p /c/Projekte/website/mywebsite/src/app/\\\\[locale\\\\]/courses)",
       "Bash(mkdir -p /c/Projekte/website/mywebsite/src/app/\\\\[locale\\\\]/features)",
       "Bash(mkdir -p /c/Projekte/website/mywebsite/src/app/\\\\[locale\\\\]/usecases)",
-      "Bash(mkdir -p /c/Projekte/website/mywebsite/src/app/\\\\[locale\\\\]/about)"
+      "Bash(mkdir -p /c/Projekte/website/mywebsite/src/app/\\\\[locale\\\\]/about)",
+      "Bash(node -e \"require\\('sanity'\\); console.log\\('sanity ok'\\)\")",
+      "Bash(node -e \"require\\('next-sanity'\\); console.log\\('ok'\\)\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Projekte\\website\\mywebsite\\src\\app\\studio"
     ]
   }
 }
