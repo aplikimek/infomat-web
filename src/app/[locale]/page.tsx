@@ -1,5 +1,6 @@
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   MapPin,
@@ -54,24 +55,18 @@ function HeroSection() {
           </div>
         </div>
 
-        {/* Right - Math visual */}
+        {/* Right - Hero image */}
         <div className="hidden lg:flex items-center justify-center">
-          <div className="relative w-full max-w-md aspect-square">
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/20 to-indigo-600/10 border border-blue-500/20" />
-            <div className="absolute inset-6 rounded-2xl bg-slate-900/80 border border-slate-700/50 flex flex-col items-center justify-center gap-6 p-8 font-mono">
-              <div className="text-5xl font-bold text-blue-400 select-none">Σ</div>
-              <div className="text-slate-300 text-sm text-center space-y-2">
-                <div className="bg-slate-800 rounded-lg px-4 py-2 text-blue-300">
-                  f(x) = ∫ₐᵇ x² dx
-                </div>
-                <div className="bg-slate-800 rounded-lg px-4 py-2 text-green-400">
-                  min cᵀx  s.t. Ax ≤ b
-                </div>
-                <div className="bg-slate-800 rounded-lg px-4 py-2 text-violet-400">
-                  d(p,q) = √(Δx² + Δy²)
-                </div>
-              </div>
-            </div>
+          <div className="relative w-full max-w-lg">
+            <div className="absolute inset-0 bg-blue-600/10 rounded-3xl blur-2xl" />
+            <Image
+              src="/hero-math.png"
+              alt="InfoMat Applied Mathematics"
+              width={600}
+              height={500}
+              className="relative z-10 w-full h-auto object-contain drop-shadow-2xl"
+              priority
+            />
           </div>
         </div>
       </div>
