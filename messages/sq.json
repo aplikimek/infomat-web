@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "home": "Kryefaqja",
+    "projects": "Projektet",
+    "blog": "Blog",
+    "contact": "Kontakt"
+  },
+  "home": {
+    "hero": {
+      "badge": "Matematikë e Aplikuar & GIS",
+      "title": "Zgjidhje Reale me",
+      "titleHighlight": "Matematikë të Aplikuar",
+      "subtitle": "Ndërtojmë aplikime GIS, kërkime operacionale dhe mjete analitike që transformojnë probleme komplekse në zgjidhje të qarta dhe të matshme.",
+      "cta_primary": "Shiko Projektet",
+      "cta_secondary": "Lexo Blog-un"
+    },
+    "about": {
+      "title": "Rreth InfoMat",
+      "subtitle": "Kush jemi ne",
+      "description1": "InfoMat është një platformë e dedikuar ndërtimit të aplikimeve të bazuara në matematikën e aplikuar. Ne kombinojmë GIS, optimizimin, statistikën dhe vizualizimin për të ofruar zgjidhje reale.",
+      "description2": "Qëllimi ynë është të bëjmë matematikën e aplikuar të aksesueshme dhe praktike për bizneset, institucionet akademike dhe organizatat shtetërore."
+    },
+    "services": {
+      "title": "Fushat e Ekspertizës",
+      "subtitle": "Çfarë ofrojmë",
+      "gis": {
+        "title": "Aplikime GIS",
+        "desc": "Analiza hapësinore, harta interaktive, modelim gjeografik dhe integrim të të dhënave territoriale."
+      },
+      "or": {
+        "title": "Kërkime Operacionale",
+        "desc": "Optimizim linear dhe jolinear, programim dinamik, teori grafësh dhe algoritme të avancuara."
+      },
+      "stats": {
+        "title": "Statistikë & Analitikë",
+        "desc": "Modelim statistikor, parashikim, analiza të të dhënave dhe vizualizim i rezultateve."
+      },
+      "viz": {
+        "title": "Vizualizim Matematik",
+        "desc": "Grafikë interaktive, animacione matematike dhe mjete didaktike për edukim."
+      }
+    },
+    "stats": {
+      "projects": "Projekte",
+      "algorithms": "Algoritme",
+      "datasets": "Datasete",
+      "years": "Vite Eksperiencë"
+    }
+  },
+  "projects": {
+    "title": "Projektet",
+    "subtitle": "Aplikime të ndërtuara me matematikë të aplikuar",
+    "filter_all": "Të gjitha",
+    "filter_gis": "GIS",
+    "filter_or": "Kërk. Operacionale",
+    "filter_stats": "Statistikë",
+    "view": "Shiko Projektin",
+    "source": "Kodi Burimor",
+    "tags": "Etiketat"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Artikuj mbi matematikën e aplikuar, GIS dhe kërkimet operacionale",
+    "read_more": "Lexo më shumë",
+    "min_read": "min lexim",
+    "categories": "Kategoritë",
+    "latest": "Artikujt e Fundit"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "subtitle": "Na kontaktoni për bashkëpunim ose pyetje",
+    "name": "Emri i plotë",
+    "email": "Adresa email",
+    "subject": "Subjekti",
+    "message": "Mesazhi",
+    "send": "Dërgo Mesazhin",
+    "sending": "Duke dërguar...",
+    "success": "Mesazhi u dërgua me sukses!",
+    "info_title": "Informacione Kontakti"
+  },
+  "footer": {
+    "tagline": "Matematikë e aplikuar për probleme reale.",
+    "links": "Lidhje",
+    "social": "Rrjete Sociale",
+    "rights": "Të gjitha të drejtat e rezervuara."
+  }
+}

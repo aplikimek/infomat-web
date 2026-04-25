@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "badge": "Applied Mathematics & GIS",
+      "title": "Real-World Solutions with",
+      "titleHighlight": "Applied Mathematics",
+      "subtitle": "We build GIS applications, operational research tools and analytical software that transform complex problems into clear, measurable solutions.",
+      "cta_primary": "View Projects",
+      "cta_secondary": "Read Blog"
+    },
+    "about": {
+      "title": "About InfoMat",
+      "subtitle": "Who we are",
+      "description1": "InfoMat is a platform dedicated to building applications based on applied mathematics. We combine GIS, optimization, statistics and visualization to deliver real-world solutions.",
+      "description2": "Our mission is to make applied mathematics accessible and practical for businesses, academic institutions and public organizations."
+    },
+    "services": {
+      "title": "Areas of Expertise",
+      "subtitle": "What we offer",
+      "gis": {
+        "title": "GIS Applications",
+        "desc": "Spatial analysis, interactive maps, geographic modeling and integration of territorial data."
+      },
+      "or": {
+        "title": "Operational Research",
+        "desc": "Linear and nonlinear optimization, dynamic programming, graph theory and advanced algorithms."
+      },
+      "stats": {
+        "title": "Statistics & Analytics",
+        "desc": "Statistical modeling, forecasting, data analysis and results visualization."
+      },
+      "viz": {
+        "title": "Mathematical Visualization",
+        "desc": "Interactive graphs, mathematical animations and didactic tools for education."
+      }
+    },
+    "stats": {
+      "projects": "Projects",
+      "algorithms": "Algorithms",
+      "datasets": "Datasets",
+      "years": "Years Experience"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Applications built with applied mathematics",
+    "filter_all": "All",
+    "filter_gis": "GIS",
+    "filter_or": "Op. Research",
+    "filter_stats": "Statistics",
+    "view": "View Project",
+    "source": "Source Code",
+    "tags": "Tags"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Articles on applied mathematics, GIS and operational research",
+    "read_more": "Read more",
+    "min_read": "min read",
+    "categories": "Categories",
+    "latest": "Latest Articles"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Reach out for collaboration or inquiries",
+    "name": "Full name",
+    "email": "Email address",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "info_title": "Contact Information"
+  },
+  "footer": {
+    "tagline": "Applied mathematics for real-world problems.",
+    "links": "Links",
+    "social": "Social",
+    "rights": "All rights reserved."
+  }
+}
