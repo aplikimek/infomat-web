@@ -1,18 +1,69 @@
 {
   "nav": {
     "home": "Kryefaqja",
+    "features": "Veçoritë",
+    "tools": "Mjetet",
+    "courses": "Kurset",
+    "usecases": "Raste Përdorimi",
     "projects": "Projektet",
     "blog": "Blog",
-    "contact": "Kontakt"
+    "about": "Rreth Nesh",
+    "contact": "Kontakt",
+    "getstarted": "Fillo Tani"
   },
   "home": {
     "hero": {
-      "badge": "Matematikë e Aplikuar & GIS",
-      "title": "Zgjidhje Reale me",
-      "titleHighlight": "Matematikë të Aplikuar",
-      "subtitle": "Ndërtojmë aplikime GIS, kërkime operacionale dhe mjete analitike që transformojnë probleme komplekse në zgjidhje të qarta dhe të matshme.",
-      "cta_primary": "Shiko Projektet",
-      "cta_secondary": "Lexo Blog-un"
+      "badge": "MATEMATIKË E APLIKUAR. NDIKIM REAL.",
+      "title": "Ku Matematika",
+      "titleHighlight": "Takon Aplikimin",
+      "subtitle": "InfoMat është platforma juaj për të mësuar, ndërtuar dhe aplikuar inteligjencën matematike për zgjidhjen e problemeve reale në teknologji, të dhëna dhe më gjerë.",
+      "cta_primary": "Fillo të Mësosh",
+      "cta_secondary": "Eksploro Mjetet"
+    },
+    "features": {
+      "title": "Veçori të Fuqishme për Zgjidhje më të Zgjuara",
+      "courses": {
+        "title": "Kurse Matematike të Aplikuara",
+        "desc": "Mëso matematikën me shembuj praktikë dhe aplikime në botën reale.",
+        "link": "Mëso më shumë"
+      },
+      "datatools": {
+        "title": "Mjete Analize të Të Dhënave",
+        "desc": "Mjete të fuqishme për të analizuar, vizualizuar dhe interpretuar të dhënat tuaja.",
+        "link": "Mëso më shumë"
+      },
+      "algorithms": {
+        "title": "Dizajn Algoritmesh",
+        "desc": "Dizajnoni dhe implementoni algoritme efikase për probleme komplekse.",
+        "link": "Mëso më shumë"
+      },
+      "casestudies": {
+        "title": "Raste Studimi",
+        "desc": "Eksploroni raste studimi reale nga teknologjia, financa dhe më shumë.",
+        "link": "Mëso më shumë"
+      }
+    },
+    "tools": {
+      "title": "Mjete Interaktive",
+      "subtitle": "MJETE INTERAKTIVE",
+      "description": "Eksploro. Llogarit. Kuptoje.",
+      "subdesc": "Përdorni mjetet tona interaktive dhe simulatorët për të eksperimentuar me modele matematike dhe parë rezultate në kohë reale.",
+      "cta": "Shiko Të Gjitha Mjetet",
+      "matrix": {
+        "title": "Kalkulator Matricash",
+        "desc": "Kryeni operacione mbi matrica me lehtësi.",
+        "link": "Hap Mjetin"
+      },
+      "plotter": {
+        "title": "Vizualizues Funksionesh",
+        "desc": "Vizualizoni funksione dhe analizoni sjelljen e tyre.",
+        "link": "Hap Mjetin"
+      },
+      "regression": {
+        "title": "Analizë Regresioni",
+        "desc": "Ndërtoni dhe vlerësoni modele regresioni.",
+        "link": "Hap Mjetin"
+      }
     },
     "about": {
       "title": "Rreth InfoMat",

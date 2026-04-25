@@ -1,18 +1,69 @@
 {
   "nav": {
     "home": "Home",
+    "features": "Features",
+    "tools": "Tools",
+    "courses": "Courses",
+    "usecases": "Use Cases",
     "projects": "Projects",
     "blog": "Blog",
-    "contact": "Contact"
+    "about": "About",
+    "contact": "Contact",
+    "getstarted": "Get Started"
   },
   "home": {
     "hero": {
-      "badge": "Applied Mathematics & GIS",
-      "title": "Real-World Solutions with",
-      "titleHighlight": "Applied Mathematics",
-      "subtitle": "We build GIS applications, operational research tools and analytical software that transform complex problems into clear, measurable solutions.",
-      "cta_primary": "View Projects",
-      "cta_secondary": "Read Blog"
+      "badge": "APPLIED MATH. REAL IMPACT.",
+      "title": "Where Math",
+      "titleHighlight": "Meets Application",
+      "subtitle": "InfoMat is your platform for learning, building and applying mathematical intelligence to solve real-world problems in technology, data and beyond.",
+      "cta_primary": "Start Learning",
+      "cta_secondary": "Explore Tools"
+    },
+    "features": {
+      "title": "Powerful Features for Smarter Solutions",
+      "courses": {
+        "title": "Applied Math Courses",
+        "desc": "Learn mathematics with hands-on examples and real-world applications.",
+        "link": "Learn more"
+      },
+      "datatools": {
+        "title": "Data Analysis Tools",
+        "desc": "Powerful tools to analyze, visualize and interpret your data.",
+        "link": "Learn more"
+      },
+      "algorithms": {
+        "title": "Algorithm Design",
+        "desc": "Design and implement efficient algorithms for complex problems.",
+        "link": "Learn more"
+      },
+      "casestudies": {
+        "title": "Case Studies",
+        "desc": "Explore real-world case studies from tech, finance, and more.",
+        "link": "Learn more"
+      }
+    },
+    "tools": {
+      "title": "Interactive Tools",
+      "subtitle": "INTERACTIVE TOOLS",
+      "description": "Explore. Calculate. Understand.",
+      "subdesc": "Use our interactive tools and simulators to experiment with mathematical models and see results in real-time.",
+      "cta": "View All Tools",
+      "matrix": {
+        "title": "Matrix Calculator",
+        "desc": "Perform operations on matrices with ease.",
+        "link": "Open Tool"
+      },
+      "plotter": {
+        "title": "Function Plotter",
+        "desc": "Visualize functions and analyze their behavior.",
+        "link": "Open Tool"
+      },
+      "regression": {
+        "title": "Regression Analysis",
+        "desc": "Build and evaluate regression models.",
+        "link": "Open Tool"
+      }
     },
     "about": {
       "title": "About InfoMat",

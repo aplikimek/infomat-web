@@ -9,8 +9,12 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { key: "home", href: "/" },
-  { key: "projects", href: "/projects" },
+  { key: "features", href: "/features" },
+  { key: "tools", href: "/tools" },
+  { key: "courses", href: "/courses" },
+  { key: "usecases", href: "/usecases" },
   { key: "blog", href: "/blog" },
+  { key: "about", href: "/about" },
   { key: "contact", href: "/contact" },
 ];
 
@@ -46,19 +50,20 @@ export default function Header() {
           : "bg-transparent"
       )}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
         {/* Logo */}
-        <Link href={localePath("/")} className="flex items-center gap-2 group">
+        <Link href={localePath("/")} className="flex items-center gap-2 shrink-0">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-sm">
             IM
           </div>
           <span className="font-bold text-white text-lg tracking-tight">
             Info<span className="text-blue-400">Mat</span>
+            <span className="text-slate-500 font-normal text-sm">.app</span>
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-0.5">
           {navLinks.map(({ key, href }) => {
             const isActive = pathname === localePath(href);
             return (
@@ -66,31 +71,39 @@ export default function Header() {
                 key={key}
                 href={localePath(href)}
                 className={cn(
-                  "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+                  "px-3 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap",
                   isActive
                     ? "text-blue-400 bg-blue-400/10"
                     : "text-slate-300 hover:text-white hover:bg-slate-700/50"
                 )}
               >
-                {t(key)}
+                {t(key as "home" | "features" | "tools" | "courses" | "usecases" | "projects" | "blog" | "about" | "contact" | "getstarted")}
               </Link>
             );
           })}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 shrink-0">
           {/* Language Toggle */}
           <button
             onClick={switchLocale}
-            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-600 text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors text-sm font-medium"
+            className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-600 text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors text-sm font-medium"
           >
             <span className="text-xs">{locale === "sq" ? "🇦🇱" : "🇬🇧"}</span>
             {locale === "sq" ? "EN" : "SQ"}
           </button>
 
+          {/* Get Started button */}
+          <Link
+            href={localePath("/contact")}
+            className="hidden lg:inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition-colors"
+          >
+            {t("getstarted")}
+          </Link>
+
           {/* Mobile menu button */}
           <button
-            className="md:hidden text-slate-300 hover:text-white p-1"
+            className="lg:hidden text-slate-300 hover:text-white p-1"
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -100,7 +113,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-slate-900/98 backdrop-blur-md border-t border-slate-700/50 px-4 py-4 flex flex-col gap-2">
+        <div className="lg:hidden bg-slate-900/98 backdrop-blur-md border-t border-slate-700/50 px-4 py-4 flex flex-col gap-1">
           {navLinks.map(({ key, href }) => (
             <Link
               key={key}
@@ -108,15 +121,24 @@ export default function Header() {
               onClick={() => setMenuOpen(false)}
               className="px-4 py-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-700/50 font-medium transition-colors"
             >
-              {t(key)}
+              {t(key as "home" | "features" | "tools" | "courses" | "usecases" | "projects" | "blog" | "about" | "contact" | "getstarted")}
             </Link>
           ))}
-          <button
-            onClick={() => { switchLocale(); setMenuOpen(false); }}
-            className="mt-2 px-4 py-2.5 rounded-lg border border-slate-600 text-slate-300 hover:border-blue-400 hover:text-blue-400 text-sm font-medium text-left transition-colors"
-          >
-            {locale === "sq" ? "Switch to English 🇬🇧" : "Kalo në Shqip 🇦🇱"}
-          </button>
+          <div className="flex gap-2 mt-3 pt-3 border-t border-slate-700">
+            <button
+              onClick={() => { switchLocale(); setMenuOpen(false); }}
+              className="flex-1 px-4 py-2.5 rounded-lg border border-slate-600 text-slate-300 text-sm font-medium text-center transition-colors hover:border-blue-400 hover:text-blue-400"
+            >
+              {locale === "sq" ? "🇬🇧 EN" : "🇦🇱 SQ"}
+            </button>
+            <Link
+              href={localePath("/contact")}
+              onClick={() => setMenuOpen(false)}
+              className="flex-1 px-4 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-semibold text-center"
+            >
+              {t("getstarted")}
+            </Link>
+          </div>
         </div>
       )}
     </header>

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /c/Projekte/website/mywebsite/src/app/\\\\[locale\\\\]/tools)",
+      "Bash(mkdir -p /c/Projekte/website/mywebsite/src/app/\\\\[locale\\\\]/courses)",
+      "Bash(mkdir -p /c/Projekte/website/mywebsite/src/app/\\\\[locale\\\\]/features)",
+      "Bash(mkdir -p /c/Projekte/website/mywebsite/src/app/\\\\[locale\\\\]/usecases)",
+      "Bash(mkdir -p /c/Projekte/website/mywebsite/src/app/\\\\[locale\\\\]/about)"
+    ]
+  }
+}
