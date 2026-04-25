@@ -28,9 +28,9 @@ const staticCourses: Course[] = [
 ];
 
 const levelLabels: Record<string, { sq: string; en: string; color: string }> = {
-  beginner:     { sq: "Fillues",  en: "Beginner",     color: "bg-green-100 text-green-400 border-green-500/20" },
-  intermediate: { sq: "Mesatar",  en: "Intermediate",  color: "bg-blue-100 text-blue-600 border-blue-500/20" },
-  advanced:     { sq: "Avancuar", en: "Advanced",      color: "bg-violet-100 text-violet-400 border-violet-500/20" },
+  beginner:     { sq: "Fillues",  en: "Beginner",     color: "bg-green-500/10 text-green-400 border-green-500/20" },
+  intermediate: { sq: "Mesatar",  en: "Intermediate",  color: "bg-blue-500/10 text-blue-400 border-blue-500/20" },
+  advanced:     { sq: "Avancuar", en: "Advanced",      color: "bg-violet-500/10 text-violet-400 border-violet-500/20" },
 };
 
 export default function CoursesPage() {
@@ -44,14 +44,14 @@ export default function CoursesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-blue-50 pt-24 pb-20">
+    <div className="min-h-screen bg-slate-950 pt-24 pb-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
-          <p className="text-blue-600 text-sm font-semibold uppercase tracking-widest mb-3">InfoMat</p>
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+          <p className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-3">InfoMat</p>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             {locale === "sq" ? "Kurset" : "Courses"}
           </h1>
-          <p className="text-gray-500 text-lg max-w-xl mx-auto">
+          <p className="text-slate-400 text-lg max-w-xl mx-auto">
             {locale === "sq"
               ? "Mëso matematikën e aplikuar me shembuj praktikë dhe projekte reale"
               : "Learn applied mathematics with hands-on examples and real-world projects"}
@@ -67,10 +67,10 @@ export default function CoursesPage() {
             const levelLabel = locale === "sq" ? lvl?.sq : lvl?.en;
 
             return (
-              <div key={course._id} className="group rounded-2xl bg-white border border-gray-200 hover:border-blue-300 p-6 flex flex-col transition-all">
+              <div key={course._id} className="group rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500/30 p-6 flex flex-col transition-all">
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
-                    <BookOpen size={18} className="text-blue-600" />
+                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
+                    <BookOpen size={18} className="text-blue-400" />
                   </div>
                   {lvl && (
                     <span className={`px-2.5 py-1 rounded-full text-xs font-medium border ${lvl.color}`}>
@@ -78,19 +78,19 @@ export default function CoursesPage() {
                     </span>
                   )}
                 </div>
-                <h3 className="text-gray-900 font-semibold text-lg mb-3 leading-snug">{title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-5">{desc}</p>
-                <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                  <span className="flex items-center gap-1.5 text-gray-400 text-xs">
+                <h3 className="text-white font-semibold text-lg mb-3 leading-snug">{title}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-5">{desc}</p>
+                <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+                  <span className="flex items-center gap-1.5 text-slate-500 text-xs">
                     <Clock size={12} /> {duration}
                   </span>
                   {course.url ? (
                     <a href={course.url} target="_blank" rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-blue-600 text-sm font-medium group-hover:gap-2 transition-all">
+                      className="flex items-center gap-1 text-blue-400 text-sm font-medium group-hover:gap-2 transition-all">
                       {locale === "sq" ? "Shiko kursin" : "View course"} <ChevronRight size={14} />
                     </a>
                   ) : (
-                    <span className="flex items-center gap-1 text-blue-600 text-sm font-medium group-hover:gap-2 transition-all cursor-pointer">
+                    <span className="flex items-center gap-1 text-blue-400 text-sm font-medium group-hover:gap-2 transition-all cursor-pointer">
                       {locale === "sq" ? "Shiko kursin" : "View course"} <ChevronRight size={14} />
                     </span>
                   )}

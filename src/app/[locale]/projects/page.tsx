@@ -66,19 +66,19 @@ export default function ProjectsPage() {
   const filtered = filter === "all" ? projects : projects.filter((p) => p.category === filter);
 
   return (
-    <div className="min-h-screen bg-blue-50 pt-24 pb-20">
+    <div className="min-h-screen bg-slate-950 pt-24 pb-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
-          <p className="text-blue-600 text-sm font-semibold uppercase tracking-widest mb-3">InfoMat</p>
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">{t("title")}</h1>
-          <p className="text-gray-500 text-lg max-w-xl mx-auto">{t("subtitle")}</p>
+          <p className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-3">InfoMat</p>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">{t("title")}</h1>
+          <p className="text-slate-400 text-lg max-w-xl mx-auto">{t("subtitle")}</p>
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {filters.map(({ key, label }) => (
             <button key={key} onClick={() => setFilter(key)}
               className={cn("px-5 py-2 rounded-full text-sm font-medium transition-all",
-                filter === key ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20" : "bg-gray-100 text-gray-500 hover:bg-slate-700 hover:text-white border border-gray-300"
+                filter === key ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20" : "bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white border border-slate-700"
               )}>
               {label}
             </button>
@@ -88,38 +88,38 @@ export default function ProjectsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((project) => (
             <div key={project._id}
-              className={cn("group rounded-2xl bg-white border p-6 flex flex-col transition-all",
-                categoryBorders[project.category] ?? "border-gray-300"
+              className={cn("group rounded-2xl bg-slate-900 border p-6 flex flex-col transition-all",
+                categoryBorders[project.category] ?? "border-slate-700"
               )}>
               <div className="flex items-center gap-2 mb-4">
-                <span className="p-1.5 rounded-lg bg-gray-100 text-gray-500">
+                <span className="p-1.5 rounded-lg bg-slate-800 text-slate-400">
                   {categoryIcons[project.category]}
                 </span>
-                <span className="text-xs text-gray-400 uppercase tracking-wider">{project.category}</span>
+                <span className="text-xs text-slate-500 uppercase tracking-wider">{project.category}</span>
               </div>
-              <h3 className="text-gray-900 font-semibold text-lg mb-3 leading-snug">
+              <h3 className="text-white font-semibold text-lg mb-3 leading-snug">
                 {locale === "sq" && project.titleSq ? project.titleSq : project.title}
               </h3>
-              <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-5">
+              <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-5">
                 {locale === "sq" && project.descriptionSq ? project.descriptionSq : project.description}
               </p>
               {project.tags && (
                 <div className="flex flex-wrap gap-2 mb-5">
                   {project.tags.map((tag) => (
-                    <span key={tag} className="px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700">{tag}</span>
+                    <span key={tag} className="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-700/50 text-slate-300">{tag}</span>
                   ))}
                 </div>
               )}
-              <div className="flex gap-3 pt-4 border-t border-gray-200">
+              <div className="flex gap-3 pt-4 border-t border-slate-800">
                 {project.liveUrl && (
                   <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-blue-600 transition-colors">
+                    className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-blue-400 transition-colors">
                     <ExternalLink size={14} /> {t("view")}
                   </a>
                 )}
                 {project.sourceUrl && (
                   <a href={project.sourceUrl} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-blue-600 transition-colors ml-auto">
+                    className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-blue-400 transition-colors ml-auto">
                     <GithubIcon size={14} /> {t("source")}
                   </a>
                 )}

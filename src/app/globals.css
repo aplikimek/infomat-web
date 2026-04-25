@@ -2,8 +2,8 @@
 @import "katex/dist/katex.min.css";
 
 :root {
-  --background: #f0f6ff;
-  --foreground: #0f172a;
+  --background: #0f172a;
+  --foreground: #e2e8f0;
 }
 
 body {
@@ -22,3 +22,55 @@ html {
   overflow-y: hidden;
   padding: 1rem 0;
 }
+
+/* ── Light theme overrides ─────────────────────────────────── */
+/* Unlayered CSS overrides @layer utilities automatically       */
+
+[data-theme="light"] body { background-color: #f0f6ff; color: #0f172a; }
+
+/* Backgrounds */
+[data-theme="light"] .bg-slate-950  { background-color: #f0f6ff; }
+[data-theme="light"] .bg-slate-900  { background-color: #ffffff; }
+[data-theme="light"] .bg-slate-800  { background-color: #f1f5f9; }
+[data-theme="light"] .bg-slate-900\/50  { background-color: rgba(255,255,255,0.85); }
+[data-theme="light"] .bg-slate-900\/80  { background-color: rgba(255,255,255,0.9); }
+[data-theme="light"] .bg-slate-900\/95  { background-color: rgba(255,255,255,0.95); }
+[data-theme="light"] .bg-slate-900\/98  { background-color: rgba(255,255,255,0.98); }
+[data-theme="light"] .bg-slate-700\/50  { background-color: rgba(241,245,249,0.6); }
+
+/* Text */
+[data-theme="light"] .text-white    { color: #0f172a; }
+[data-theme="light"] .text-slate-300 { color: #374151; }
+[data-theme="light"] .text-slate-400 { color: #6b7280; }
+[data-theme="light"] .text-slate-500 { color: #9ca3af; }
+[data-theme="light"] .text-blue-400  { color: #1d4ed8; }
+[data-theme="light"] .text-blue-300  { color: #1e40af; }
+[data-theme="light"] .text-green-400 { color: #15803d; }
+[data-theme="light"] .text-violet-400 { color: #6d28d9; }
+
+/* Borders */
+[data-theme="light"] .border-slate-800 { border-color: #e2e8f0; }
+[data-theme="light"] .border-slate-700 { border-color: #cbd5e1; }
+[data-theme="light"] .border-slate-600 { border-color: #cbd5e1; }
+[data-theme="light"] .border-slate-700\/50 { border-color: rgba(203,213,225,0.5); }
+
+/* Card accent backgrounds (keep subtle) */
+[data-theme="light"] .bg-blue-500\/10   { background-color: #dbeafe; }
+[data-theme="light"] .bg-indigo-500\/10 { background-color: #e0e7ff; }
+[data-theme="light"] .bg-violet-500\/10 { background-color: #ede9fe; }
+[data-theme="light"] .bg-cyan-500\/10   { background-color: #cffafe; }
+[data-theme="light"] .bg-green-500\/10  { background-color: #dcfce7; }
+[data-theme="light"] .bg-orange-500\/10 { background-color: #ffedd5; }
+[data-theme="light"] .bg-yellow-500\/10 { background-color: #fef9c3; }
+[data-theme="light"] .bg-blue-700\/20   { background-color: #dbeafe; }
+
+/* Hero grid pattern → lighter lines */
+[data-theme="light"] .opacity-40 { opacity: 0.7; }
+
+/* Hover states */
+[data-theme="light"] .hover\:bg-slate-800:hover { background-color: #f1f5f9; }
+[data-theme="light"] .hover\:text-white:hover    { color: #1e3a8a; }
+[data-theme="light"] .hover\:bg-slate-700\/50:hover { background-color: #eff6ff; }
+
+/* Header scrolled state */
+[data-theme="light"] .shadow-lg { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
