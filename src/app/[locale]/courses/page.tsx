@@ -1,87 +1,47 @@
-import { useTranslations } from "next-intl";
-import { GraduationCap, Clock, ChevronRight, BookOpen } from "lucide-react";
+"use client";
 
-const courses = [
-  {
-    level: "Fillues",
-    levelEn: "Beginner",
-    title: "Hyrje në Matematikën e Aplikuar",
-    titleEn: "Introduction to Applied Mathematics",
-    desc: "Bazat e matematikës diskrete, algjebra lineare dhe llogaritja diferenciale me aplikime praktike.",
-    descEn: "Fundamentals of discrete math, linear algebra and calculus with practical applications.",
-    duration: "8 javë",
-    durationEn: "8 weeks",
-    color: "blue",
-  },
-  {
-    level: "Mesatar",
-    levelEn: "Intermediate",
-    title: "Programim Linear & Optimizim",
-    titleEn: "Linear Programming & Optimization",
-    desc: "Metoda Simplex, dualiteti, analiza sensitivitetit dhe aplikime në logjistikë dhe prodhim.",
-    descEn: "Simplex method, duality, sensitivity analysis and applications in logistics and production.",
-    duration: "10 javë",
-    durationEn: "10 weeks",
-    color: "indigo",
-  },
-  {
-    level: "Mesatar",
-    levelEn: "Intermediate",
-    title: "Bazat e GIS dhe Analizës Hapësinore",
-    titleEn: "GIS Fundamentals & Spatial Analysis",
-    desc: "Sisteme koordinatash, projeksione, analizë rrjetore dhe modelim gjeografik me QGIS/Python.",
-    descEn: "Coordinate systems, projections, network analysis and geographic modeling with QGIS/Python.",
-    duration: "12 javë",
-    durationEn: "12 weeks",
-    color: "green",
-  },
-  {
-    level: "Avancuar",
-    levelEn: "Advanced",
-    title: "Algortime dhe Strukturat e të Dhënave",
-    titleEn: "Algorithms & Data Structures",
-    desc: "Teoria grafësh, algoritme heuristike, programim dinamik dhe kompleksiteti llogaritës.",
-    descEn: "Graph theory, heuristic algorithms, dynamic programming and computational complexity.",
-    duration: "12 javë",
-    durationEn: "12 weeks",
-    color: "violet",
-  },
-  {
-    level: "Avancuar",
-    levelEn: "Advanced",
-    title: "Statistikë & Machine Learning",
-    titleEn: "Statistics & Machine Learning",
-    desc: "Regresion, klasifikim, cluster analysis dhe modele parashikuese me Python/R.",
-    descEn: "Regression, classification, cluster analysis and predictive models with Python/R.",
-    duration: "14 javë",
-    durationEn: "14 weeks",
-    color: "cyan",
-  },
-  {
-    level: "Avancuar",
-    levelEn: "Advanced",
-    title: "Kërkime Operacionale të Avancuara",
-    titleEn: "Advanced Operational Research",
-    desc: "VRP, TSP, simulim Monte Carlo, teori lojërash dhe metaheuristika.",
-    descEn: "VRP, TSP, Monte Carlo simulation, game theory and metaheuristics.",
-    duration: "14 javë",
-    durationEn: "14 weeks",
-    color: "orange",
-  },
+import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { Clock, ChevronRight, BookOpen } from "lucide-react";
+import { client } from "@/sanity/lib/client";
+import { coursesQuery } from "@/sanity/lib/queries";
+
+type Course = {
+  _id: string;
+  titleSq?: string;
+  titleEn?: string;
+  descSq?: string;
+  descEn?: string;
+  level?: string;
+  durationSq?: string;
+  durationEn?: string;
+  url?: string;
+};
+
+const staticCourses: Course[] = [
+  { _id: "1", titleSq: "Hyrje në Matematikën e Aplikuar", titleEn: "Introduction to Applied Mathematics", descSq: "Bazat e matematikës diskrete, algjebra lineare dhe llogaritja diferenciale me aplikime praktike.", descEn: "Fundamentals of discrete math, linear algebra and calculus with practical applications.", level: "beginner", durationSq: "8 javë", durationEn: "8 weeks" },
+  { _id: "2", titleSq: "Programim Linear & Optimizim", titleEn: "Linear Programming & Optimization", descSq: "Metoda Simplex, dualiteti, analiza sensitivitetit dhe aplikime në logjistikë dhe prodhim.", descEn: "Simplex method, duality, sensitivity analysis and applications in logistics.", level: "intermediate", durationSq: "10 javë", durationEn: "10 weeks" },
+  { _id: "3", titleSq: "Bazat e GIS dhe Analizës Hapësinore", titleEn: "GIS Fundamentals & Spatial Analysis", descSq: "Sisteme koordinatash, projeksione, analizë rrjetore dhe modelim gjeografik me QGIS/Python.", descEn: "Coordinate systems, projections, network analysis and geographic modeling.", level: "intermediate", durationSq: "12 javë", durationEn: "12 weeks" },
+  { _id: "4", titleSq: "Algortime dhe Strukturat e të Dhënave", titleEn: "Algorithms & Data Structures", descSq: "Teoria grafësh, algoritme heuristike, programim dinamik dhe kompleksiteti llogaritës.", descEn: "Graph theory, heuristic algorithms, dynamic programming.", level: "advanced", durationSq: "12 javë", durationEn: "12 weeks" },
+  { _id: "5", titleSq: "Statistikë & Machine Learning", titleEn: "Statistics & Machine Learning", descSq: "Regresion, klasifikim, cluster analysis dhe modele parashikuese me Python/R.", descEn: "Regression, classification, cluster analysis and predictive models.", level: "advanced", durationSq: "14 javë", durationEn: "14 weeks" },
+  { _id: "6", titleSq: "Kërkime Operacionale të Avancuara", titleEn: "Advanced Operational Research", descSq: "VRP, TSP, simulim Monte Carlo, teori lojërash dhe metaheuristika.", descEn: "VRP, TSP, Monte Carlo simulation, game theory and metaheuristics.", level: "advanced", durationSq: "14 javë", durationEn: "14 weeks" },
 ];
 
-const levelColors: Record<string, string> = {
-  "Fillues": "bg-green-500/10 text-green-400 border-green-500/20",
-  "Beginner": "bg-green-500/10 text-green-400 border-green-500/20",
-  "Mesatar": "bg-blue-500/10 text-blue-400 border-blue-500/20",
-  "Intermediate": "bg-blue-500/10 text-blue-400 border-blue-500/20",
-  "Avancuar": "bg-violet-500/10 text-violet-400 border-violet-500/20",
-  "Advanced": "bg-violet-500/10 text-violet-400 border-violet-500/20",
+const levelLabels: Record<string, { sq: string; en: string; color: string }> = {
+  beginner:     { sq: "Fillues",  en: "Beginner",     color: "bg-green-500/10 text-green-400 border-green-500/20" },
+  intermediate: { sq: "Mesatar",  en: "Intermediate",  color: "bg-blue-500/10 text-blue-400 border-blue-500/20" },
+  advanced:     { sq: "Avancuar", en: "Advanced",      color: "bg-violet-500/10 text-violet-400 border-violet-500/20" },
 };
 
 export default function CoursesPage() {
-  const t = useTranslations("nav");
-  const locale = t("home") === "Kryefaqja" ? "sq" : "en";
+  const locale = useTranslations("nav")("home") === "Kryefaqja" ? "sq" : "en";
+  const [courses, setCourses] = useState<Course[]>(staticCourses);
+
+  useEffect(() => {
+    client.fetch<Course[]>(coursesQuery)
+      .then((data) => { if (data?.length) setCourses(data); })
+      .catch(() => {});
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-950 pt-24 pb-20">
@@ -99,21 +59,24 @@ export default function CoursesPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {courses.map((course, i) => {
-            const level = locale === "sq" ? course.level : course.levelEn;
-            const title = locale === "sq" ? course.title : course.titleEn;
-            const desc = locale === "sq" ? course.desc : course.descEn;
-            const duration = locale === "sq" ? course.duration : course.durationEn;
+          {courses.map((course) => {
+            const lvl = levelLabels[course.level ?? "beginner"];
+            const title = locale === "sq" ? course.titleSq : course.titleEn;
+            const desc = locale === "sq" ? course.descSq : course.descEn;
+            const duration = locale === "sq" ? course.durationSq : course.durationEn;
+            const levelLabel = locale === "sq" ? lvl?.sq : lvl?.en;
 
             return (
-              <div key={i} className="group rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500/30 p-6 flex flex-col transition-all">
+              <div key={course._id} className="group rounded-2xl bg-slate-900 border border-slate-800 hover:border-blue-500/30 p-6 flex flex-col transition-all">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
                     <BookOpen size={18} className="text-blue-400" />
                   </div>
-                  <span className={`px-2.5 py-1 rounded-full text-xs font-medium border ${levelColors[level]}`}>
-                    {level}
-                  </span>
+                  {lvl && (
+                    <span className={`px-2.5 py-1 rounded-full text-xs font-medium border ${lvl.color}`}>
+                      {levelLabel}
+                    </span>
+                  )}
                 </div>
                 <h3 className="text-white font-semibold text-lg mb-3 leading-snug">{title}</h3>
                 <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-5">{desc}</p>
@@ -121,10 +84,16 @@ export default function CoursesPage() {
                   <span className="flex items-center gap-1.5 text-slate-500 text-xs">
                     <Clock size={12} /> {duration}
                   </span>
-                  <button className="flex items-center gap-1 text-blue-400 text-sm font-medium group-hover:gap-2 transition-all">
-                    {locale === "sq" ? "Shiko kursin" : "View course"}
-                    <ChevronRight size={14} />
-                  </button>
+                  {course.url ? (
+                    <a href={course.url} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-blue-400 text-sm font-medium group-hover:gap-2 transition-all">
+                      {locale === "sq" ? "Shiko kursin" : "View course"} <ChevronRight size={14} />
+                    </a>
+                  ) : (
+                    <span className="flex items-center gap-1 text-blue-400 text-sm font-medium group-hover:gap-2 transition-all cursor-pointer">
+                      {locale === "sq" ? "Shiko kursin" : "View course"} <ChevronRight size={14} />
+                    </span>
+                  )}
                 </div>
               </div>
             );
