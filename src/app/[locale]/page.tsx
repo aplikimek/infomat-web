@@ -72,12 +72,13 @@ function HeroSection() {
         {/* Right - Hero image or math visual fallback */}
         <div className="hidden lg:flex items-center justify-center">
           {heroData.heroImageUrl ? (
-            <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden border border-blue-500/20">
+            <div className="relative w-full max-w-lg rounded-3xl overflow-hidden border border-blue-500/20">
               <Image
                 src={heroData.heroImageUrl}
                 alt="Hero"
-                fill
-                className="object-cover"
+                width={600}
+                height={450}
+                className="w-full h-auto object-contain"
                 priority
               />
             </div>
