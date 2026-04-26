@@ -23,6 +23,7 @@ export default function ContactPage() {
   const t = useTranslations("contact");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [settings, setSettings] = useState<SiteSettings>(staticSettings);
 
   useEffect(() => {
@@ -34,9 +35,30 @@ export default function ContactPage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    setSubmitted(true);
+    setError("");
+
+    const form = new FormData(e.currentTarget);
+    const body = {
+      name: form.get("name"),
+      email: form.get("email"),
+      subject: form.get("subject"),
+      message: form.get("message"),
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Dërgimi dështoi. Provo sërish.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -64,6 +86,7 @@ export default function ContactPage() {
                     <label className="block text-sm text-slate-400 mb-2">{t("name")}</label>
                     <input
                       type="text"
+                      name="name"
                       required
                       className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 transition-colors"
                       placeholder="John Doe"
@@ -73,6 +96,7 @@ export default function ContactPage() {
                     <label className="block text-sm text-slate-400 mb-2">{t("email")}</label>
                     <input
                       type="email"
+                      name="email"
                       required
                       className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 transition-colors"
                       placeholder="john@example.com"
@@ -84,6 +108,7 @@ export default function ContactPage() {
                   <label className="block text-sm text-slate-400 mb-2">{t("subject")}</label>
                   <input
                     type="text"
+                    name="subject"
                     required
                     className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 transition-colors"
                     placeholder="GIS collaboration..."
@@ -93,12 +118,17 @@ export default function ContactPage() {
                 <div>
                   <label className="block text-sm text-slate-400 mb-2">{t("message")}</label>
                   <textarea
+                    name="message"
                     required
                     rows={6}
                     className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 transition-colors resize-none"
                     placeholder="..."
                   />
                 </div>
+
+                {error && (
+                  <p className="text-red-400 text-sm">{error}</p>
+                )}
 
                 <button
                   type="submit"
