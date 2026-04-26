@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
 
-export const heroQuery = groq`*[_type == "hero"][0]`;
+export const heroQuery = groq`*[_type == "hero"][0]{ ..., "heroImageUrl": heroImage.asset->url }`;
 
 export const siteSettingsQuery = groq`*[_type == "siteSettings"][0]`;
 

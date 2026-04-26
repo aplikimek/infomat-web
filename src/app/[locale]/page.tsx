@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   MapPin,
@@ -16,11 +17,20 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { client } from "@/sanity/lib/client";
-import { featuresSectionQuery } from "@/sanity/lib/queries";
+import { featuresSectionQuery, heroQuery } from "@/sanity/lib/queries";
+
+type HeroData = { heroImageUrl?: string };
 
 function HeroSection() {
   const t = useTranslations("home.hero");
   const locale = useLocale();
+  const [heroData, setHeroData] = useState<HeroData>({});
+
+  useEffect(() => {
+    client.fetch<HeroData>(heroQuery)
+      .then((d) => { if (d) setHeroData(d); })
+      .catch(() => {});
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950">
@@ -59,25 +69,37 @@ function HeroSection() {
           </div>
         </div>
 
-        {/* Right - Math visual */}
+        {/* Right - Hero image or math visual fallback */}
         <div className="hidden lg:flex items-center justify-center">
-          <div className="relative w-full max-w-md aspect-square">
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/20 to-indigo-600/10 border border-blue-500/20" />
-            <div className="absolute inset-6 rounded-2xl bg-slate-900/80 border border-slate-700/50 flex flex-col items-center justify-center gap-6 p-8 font-mono">
-              <div className="text-5xl font-bold text-blue-400 select-none">Σ</div>
-              <div className="text-slate-300 text-sm text-center space-y-2">
-                <div className="bg-slate-800 rounded-lg px-4 py-2 text-blue-300">
-                  f(x) = ∫ₐᵇ x² dx
-                </div>
-                <div className="bg-slate-800 rounded-lg px-4 py-2 text-green-400">
-                  min cᵀx  s.t. Ax ≤ b
-                </div>
-                <div className="bg-slate-800 rounded-lg px-4 py-2 text-violet-400">
-                  d(p,q) = √(Δx² + Δy²)
+          {heroData.heroImageUrl ? (
+            <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden border border-blue-500/20">
+              <Image
+                src={heroData.heroImageUrl}
+                alt="Hero"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          ) : (
+            <div className="relative w-full max-w-md aspect-square">
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/20 to-indigo-600/10 border border-blue-500/20" />
+              <div className="absolute inset-6 rounded-2xl bg-slate-900/80 border border-slate-700/50 flex flex-col items-center justify-center gap-6 p-8 font-mono">
+                <div className="text-5xl font-bold text-blue-400 select-none">Σ</div>
+                <div className="text-slate-300 text-sm text-center space-y-2">
+                  <div className="bg-slate-800 rounded-lg px-4 py-2 text-blue-300">
+                    f(x) = ∫ₐᵇ x² dx
+                  </div>
+                  <div className="bg-slate-800 rounded-lg px-4 py-2 text-green-400">
+                    min cᵀx  s.t. Ax ≤ b
+                  </div>
+                  <div className="bg-slate-800 rounded-lg px-4 py-2 text-violet-400">
+                    d(p,q) = √(Δx² + Δy²)
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>
