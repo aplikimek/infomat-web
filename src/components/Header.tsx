@@ -142,6 +142,12 @@ export default function Header() {
             >
               {locale === "sq" ? "🇬🇧 EN" : "🇦🇱 SQ"}
             </button>
+            <button
+              onClick={() => { toggleTheme(); }}
+              className="px-4 py-2.5 rounded-lg border border-slate-600 text-slate-300 hover:border-blue-400 hover:text-blue-400 transition-colors flex items-center justify-center"
+            >
+              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
             <Link
               href={localePath("/contact")}
               onClick={() => setMenuOpen(false)}

@@ -74,3 +74,12 @@ html {
 
 /* Header scrolled state */
 [data-theme="light"] .shadow-lg { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+
+/* Hero section light mode */
+[data-theme="light"] .hero-grid {
+  background-image: linear-gradient(to right, #cbd5e1 1px, transparent 1px), linear-gradient(to bottom, #cbd5e1 1px, transparent 1px);
+  opacity: 0.4;
+}
+[data-theme="light"] .hero-overlay {
+  background-image: linear-gradient(to bottom, transparent, rgba(240,246,255,0.5), #f0f6ff);
+}
