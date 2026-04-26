@@ -48,7 +48,7 @@ export default function CoursesPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
           <p className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-3">InfoMat</p>
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
             {locale === "sq" ? "Kurset" : "Courses"}
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto">
@@ -58,7 +58,7 @@ export default function CoursesPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {courses.map((course) => {
             const lvl = levelLabels[course.level ?? "beginner"];
             const title = locale === "sq" ? course.titleSq : course.titleEn;

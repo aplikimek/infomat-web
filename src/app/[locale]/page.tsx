@@ -36,15 +36,15 @@ function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-40" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] bg-blue-600/10 rounded-full blur-3xl" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center py-16 sm:py-20 lg:py-24">
         {/* Left */}
         <div>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-semibold tracking-widest mb-8 uppercase">
             {t("badge")}
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
             {t("title")}{" "}
             <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
               {t("titleHighlight")}
@@ -168,7 +168,7 @@ function FeaturesSection() {
           <div className="w-16 h-1 bg-blue-500 rounded-full mx-auto mt-4" />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {data.items?.map((item, i) => {
             const iconKey = item.icon ?? "courses";
             return (
@@ -226,7 +226,7 @@ function InteractiveToolsSection() {
   return (
     <section className="py-24 bg-slate-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center">
           {/* Left text */}
           <div className="lg:col-span-2">
             <p className="text-blue-400 text-xs font-semibold uppercase tracking-widest mb-3">
@@ -247,7 +247,7 @@ function InteractiveToolsSection() {
           </div>
 
           {/* Right tools cards */}
-          <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {tools.map(({ key, icon, bg, border }) => (
               <div
                 key={key}
@@ -286,10 +286,10 @@ function StatsSection() {
 
   return (
     <section className="bg-slate-900 border-y border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
         {stats.map(({ value, key }) => (
           <div key={key} className="text-center">
-            <div className="text-3xl font-bold text-blue-400 mb-1">{value}</div>
+            <div className="text-2xl sm:text-3xl font-bold text-blue-400 mb-1">{value}</div>
             <div className="text-slate-400 text-sm">{t(key)}</div>
           </div>
         ))}
@@ -317,7 +317,7 @@ function ServicesSection() {
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-white">{t("title")}</h2>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {services.map(({ key, icon }) => (
             <div
               key={key}

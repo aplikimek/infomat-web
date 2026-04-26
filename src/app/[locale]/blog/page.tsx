@@ -54,12 +54,12 @@ export default function BlogPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
           <p className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-3">InfoMat</p>
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">{t("title")}</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">{t("title")}</h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto">{t("subtitle")}</p>
         </div>
 
-        <div className="flex gap-8">
-          <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="flex gap-6 lg:gap-8">
+          <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             {posts.map((post) => {
               const title   = locale === "sq" ? (post.titleSq ?? post.title) : post.title;
               const excerpt = locale === "sq" ? (post.excerptSq ?? post.excerpt) : post.excerpt;
@@ -99,7 +99,7 @@ export default function BlogPage() {
             })}
           </div>
 
-          <aside className="hidden xl:block w-56 shrink-0">
+          <aside className="hidden lg:block w-48 xl:w-56 shrink-0">
             <div className="sticky top-24 rounded-2xl bg-slate-900 border border-slate-800 p-5">
               <div className="flex items-center gap-2 mb-4">
                 <Tag size={14} className="text-blue-400" />
