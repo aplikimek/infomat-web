@@ -73,9 +73,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://github.com/infomat" target="_blank" rel="noopener noreferrer"
+                <a href="https://github.com/infomat.app" target="_blank" rel="noopener noreferrer"
                   className="hover:text-blue-400 transition-colors">
-                  github.com/infomat
+                  github.com/infomat.app
                 </a>
               </li>
             </ul>

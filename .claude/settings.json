@@ -12,7 +12,9 @@
       "Bash(where \"chrome.exe\")",
       "Read(//c/Program Files/Google/Chrome/Application/**)",
       "Bash(\"/c/Program Files/Google/Chrome/Application/chrome.exe\" --headless --disable-gpu --print-to-pdf=\"c:/Projekte/website/mywebsite/MANUAL-InfoMat.pdf\" --print-to-pdf-no-header \"file:///c:/Projekte/website/mywebsite/MANUAL-InfoMat.html\")",
-      "Bash(echo \"Exit: $?\")"
+      "Bash(echo \"Exit: $?\")",
+      "Bash(git checkout *)",
+      "Bash(npm list *)"
     ],
     "additionalDirectories": [
       "C:\\Projekte\\website\\mywebsite\\src\\app\\studio"

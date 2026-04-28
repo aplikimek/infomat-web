@@ -15,7 +15,7 @@ type SiteSettings = {
 
 const staticSettings: SiteSettings = {
   email: "info@infomat.app",
-  github: "https://github.com/infomat",
+  github: "https://github.com/infomat.app",
   linkedin: "https://linkedin.com/in/infomat",
 };
 
